@@ -58,7 +58,7 @@ export default function Projects() {
     };
 
     return (
-        <section id="projects" className="container" ref={ref} style={{ padding: '8rem 2rem', position: 'relative' }}>
+        <section id="projects" className="container section-padding" ref={ref} style={{ position: 'relative' }}>
             {/* Floating background elements */}
             <motion.div
                 animate={{
@@ -74,8 +74,8 @@ export default function Projects() {
                     position: 'absolute',
                     top: '10%',
                     right: '5%',
-                    width: '300px',
-                    height: '300px',
+                    width: 'min(300px, 50vw)',
+                    height: 'min(300px, 50vw)',
                     background: 'radial-gradient(circle, rgba(255, 46, 46, 0.05) 0%, transparent 70%)',
                     borderRadius: '50%',
                     filter: 'blur(40px)',

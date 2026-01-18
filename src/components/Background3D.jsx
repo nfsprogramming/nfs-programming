@@ -10,9 +10,10 @@ export default function Background3D() {
         let particles = [];
 
         // Configuration
-        const particleCount = 100; // Increased count
+        const isMobile = width < 768;
+        const particleCount = isMobile ? 50 : 100; // Optimized for mobile
         const connectionDistance = 150;
-        const mouseDistance = 200;
+        const mouseDistance = 250; // Increased range for capturing
 
         // Mouse state
         let mouse = { x: null, y: null };
@@ -22,6 +23,7 @@ export default function Background3D() {
             height = window.innerHeight;
             canvas.width = width;
             canvas.height = height;
+            // Re-init with correct count if needed, or just let them be naturally
             initParticles();
         };
 
@@ -38,7 +40,7 @@ export default function Background3D() {
             }
 
             update() {
-                // Mouse Interaction
+                // Mouse Interaction (Attraction / Capturing)
                 if (mouse.x != null) {
                     let dx = mouse.x - this.x;
                     let dy = mouse.y - this.y;
@@ -48,20 +50,22 @@ export default function Background3D() {
                         const forceDirectionX = dx / distance;
                         const forceDirectionY = dy / distance;
                         const force = (mouseDistance - distance) / mouseDistance;
-                        const repulsionStrength = 2; // Stronger interaction
 
-                        this.vx -= forceDirectionX * force * 0.5;
-                        this.vy -= forceDirectionY * force * 0.5;
+                        // Attraction instead of repulsion
+                        const attractionStrength = 0.8;
+
+                        this.vx += forceDirectionX * force * attractionStrength * 0.5;
+                        this.vy += forceDirectionY * force * attractionStrength * 0.5;
                     }
                 }
 
                 // Constant gentle movement
-                this.x += this.vx * this.z; // Move faster if "closer" (larger z)
+                this.x += this.vx * this.z;
                 this.y += this.vy * this.z;
 
                 // Friction to stabilize mouse interaction velocity
-                this.vx *= 0.98;
-                this.vy *= 0.98;
+                this.vx *= 0.96;
+                this.vy *= 0.96;
 
                 // Add slight randomness to prevent stagnation
                 if (Math.abs(this.vx) < 0.1) this.vx += (Math.random() - 0.5) * 0.05;
@@ -77,14 +81,15 @@ export default function Background3D() {
             draw() {
                 ctx.fillStyle = this.baseColor;
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size * this.z * 0.6, 0, Math.PI * 2); // Scale size by z
+                ctx.arc(this.x, this.y, this.size * this.z * 0.6, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
 
         const initParticles = () => {
             particles = [];
-            for (let i = 0; i < particleCount; i++) {
+            const count = width < 768 ? 50 : 100; // Recalculate based on current width
+            for (let i = 0; i < count; i++) {
                 particles.push(new Particle());
             }
         };
@@ -98,12 +103,10 @@ export default function Background3D() {
                 particle.draw();
             });
 
-            // Draw connections
+            // Draw connections between particles
             ctx.lineWidth = 0.5;
             for (let i = 0; i < particles.length; i++) {
-                // Only connect particles that are relatively close in Z-depth too (optional, but cleaner)
-                // For now, let's keep simple distance check but modulate opacity by average Z
-
+                // Connection between particles
                 for (let j = i; j < particles.length; j++) {
                     let dx = particles[i].x - particles[j].x;
                     let dy = particles[i].y - particles[j].y;
@@ -111,15 +114,32 @@ export default function Background3D() {
 
                     if (distance < connectionDistance) {
                         ctx.beginPath();
-                        // Opacity based on distance AND depth
                         let opacity = 1 - (distance / connectionDistance);
-                        // Average depth factor
                         let depthFactor = (particles[i].z + particles[j].z) / 4;
 
-                        ctx.strokeStyle = `rgba(255, 46, 46, ${opacity * depthFactor * 0.25})`;
+                        ctx.strokeStyle = `rgba(255, 46, 46, ${opacity * depthFactor * 0.2})`;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
                         ctx.stroke();
+                    }
+                }
+
+                // Mouse Connections (The "Capturing" Visual)
+                if (mouse.x != null) {
+                    let dx = mouse.x - particles[i].x;
+                    let dy = mouse.y - particles[i].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < mouseDistance) {
+                        ctx.beginPath();
+                        // Stronger opacity for mouse connections
+                        let opacity = 1 - (distance / mouseDistance);
+                        ctx.strokeStyle = `rgba(255, 46, 46, ${opacity * 0.5})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(mouse.x, mouse.y);
+                        ctx.lineTo(particles[i].x, particles[i].y);
+                        ctx.stroke();
+                        ctx.lineWidth = 0.5; // Reset
                     }
                 }
             }

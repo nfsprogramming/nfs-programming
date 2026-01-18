@@ -32,7 +32,7 @@ export default function About() {
     };
 
     return (
-        <section id="about" className="container" ref={ref} style={{ padding: '8rem 2rem' }}>
+        <section id="about" className="container section-padding" ref={ref}>
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}

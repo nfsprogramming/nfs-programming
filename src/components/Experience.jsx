@@ -31,7 +31,7 @@ export default function Experience() {
     });
 
     return (
-        <section id="experience" className="container" ref={ref} style={{ padding: '8rem 2rem' }}>
+        <section id="experience" className="container section-padding" ref={ref}>
             <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}

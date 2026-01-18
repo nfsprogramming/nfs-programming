@@ -12,7 +12,7 @@ export default function Contact() {
     ];
 
     return (
-        <section id="contact" ref={ref} style={{ padding: '6rem 2rem', position: 'relative', overflow: 'hidden' }}>
+        <section id="contact" ref={ref} className="section-padding" style={{ position: 'relative', overflow: 'hidden' }}>
             <div className="container text-center" style={{ maxWidth: '800px', position: 'relative', zIndex: 1 }}>
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
@@ -96,7 +96,9 @@ export default function Contact() {
                             cursor: 'pointer',
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '0.8rem'
+                            gap: '0.8rem',
+                            maxWidth: '100%',
+                            justifyContent: 'center'
                         }}
                     >
                         <span>Let's Collaborate</span>

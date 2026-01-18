@@ -42,7 +42,7 @@ export default function Services() {
     const [hoveredIndex, setHoveredIndex] = useState(null);
 
     return (
-        <section id="services" className="container" ref={ref} style={{ padding: '8rem 2rem' }}>
+        <section id="services" className="container section-padding" ref={ref}>
             <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}

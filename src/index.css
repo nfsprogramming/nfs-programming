@@ -113,44 +113,56 @@ p {
   color: var(--text-secondary);
 }
 
+/* Mobile Optimizations */
 @media (max-width: 768px) {
   h1 {
-    font-size: 3rem;
+    font-size: clamp(3rem, 10vw, 4.5rem);
+    word-break: break-word;
+    /* Prevent overflow on long words */
   }
 
   h2 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
 
+  /* Ensure grids collapse properly */
   .grid-2,
   .grid-3 {
     grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+    /* Reduce gap on mobile */
   }
 
+  /* Adjust Navbar Padding */
   .navbar {
-    padding: 1rem 1.5rem;
+    padding: 1rem 1.25rem;
   }
 
+  /* Improve Hamburger Visibility */
   .md-hidden {
     display: block;
     cursor: pointer;
     z-index: 200;
     position: relative;
+    color: var(--text-color);
   }
 
-  /* Mobile Navigation Menu */
+  /* Full Screen Mobile Menu */
   .nav-links {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
-    background: rgba(5, 5, 5, 0.98);
-    backdrop-filter: blur(20px);
+    height: 100dvh;
+    /* Use dynamic viewport height */
+    background: rgba(5, 5, 5, 0.95);
+    /* Slightly transparent */
+    backdrop-filter: blur(25px);
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 2.5rem;
+    padding: 2rem;
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 150;
   }
@@ -158,38 +170,71 @@ p {
   .nav-links.hidden-mobile {
     transform: translateY(-100%);
     pointer-events: none;
+    visibility: hidden;
+    /* Accessibility fix */
   }
 
   .nav-links.mobile-open {
     transform: translateY(0);
     pointer-events: all;
+    visibility: visible;
   }
 
   .nav-links a {
-    font-size: 1.5rem;
-    opacity: 1;
+    font-size: 1.75rem;
+    /* Larger touch targets */
+    font-weight: 700;
+    opacity: 0.8;
+    transition: all 0.2s;
+  }
+
+  .nav-links a:active {
+    transform: scale(0.95);
   }
 
   .hero-img {
-    width: 220px;
-    height: 220px;
+    width: 180px;
+    height: 180px;
   }
 
   .container {
-    padding: 0 1.5rem;
+    padding: 0 1.25rem;
   }
 
+  /* Reduce Padding for Cards on Mobile */
   .glass-card {
     padding: 1.5rem;
+    backdrop-filter: blur(15px);
+    /* Optimize performance */
   }
 
   .footer {
-    padding: 2rem;
+    padding: 3rem 1.5rem;
   }
 
-  /* Thin scrollbar for mobile */
   ::-webkit-scrollbar {
     width: 4px;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2.5rem;
+    /* Specific size for very small screens */
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .navbar {
+    padding: 1rem;
+  }
+
+  /* Tighter spacing for phone screens */
+  .container {
+    padding: 0 1rem;
   }
 }
 
@@ -213,9 +258,21 @@ p {
   justify-content: center;
   align-items: center;
   position: relative;
-  /* Preserve 3D context for tilt effect */
   transform-style: preserve-3d;
   padding-top: 80px;
+  overflow: hidden;
+  /* Prevent horizontal scroll from animations */
+}
+
+/* Add responsive section padding class */
+.section-padding {
+  padding: 8rem 2rem;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 5rem 1.5rem;
+  }
 }
 
 .hero-img {
@@ -299,6 +356,7 @@ p {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: padding 0.3s ease;
 }
 
 .brand-logo {
@@ -348,6 +406,7 @@ p {
 /* Utilities */
 .flex {
   display: flex;
+  align-items: center;
 }
 
 .items-center {
