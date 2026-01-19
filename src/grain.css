@@ -1,0 +1,10 @@
+/* Removed grain effect as requested */
+.grain-overlay {
+    display: none;
+}
+
+body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
