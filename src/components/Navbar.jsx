@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Github, Linkedin } from 'lucide-react';
 
 export default function Navbar() {
     const [isNavOpen, setIsNavOpen] = useState(false);
@@ -33,6 +33,18 @@ export default function Navbar() {
                         </NavLink>
                     </li>
                 ))}
+
+                {/* Social Links */}
+                <li className="hidden-mobile" style={{ width: '1px', height: '20px', background: 'rgba(255,255,255,0.2)', margin: '0 0.5rem' }}></li>
+
+                <li style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                    <a href="https://github.com/nfsprogramming" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', transition: 'transform 0.2s', color: 'inherit' }} className="social-icon">
+                        <Github size={20} />
+                    </a>
+                    <a href="https://linkedin.com/in/nfsprogramming" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', transition: 'transform 0.2s', color: 'inherit' }} className="social-icon">
+                        <Linkedin size={20} />
+                    </a>
+                </li>
             </ul>
         </nav>
     );

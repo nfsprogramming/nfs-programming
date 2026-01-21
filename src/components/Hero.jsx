@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import { ArrowRight, Code, Cpu, Globe, Rocket, Terminal, Layers } from 'lucide-react';
+import { ArrowRight, Code, Cpu, Globe, Rocket, Terminal, Layers, Github, Linkedin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Hero() {
@@ -47,7 +47,7 @@ export default function Hero() {
                     borderRadius: '50%',
                     filter: 'blur(80px)',
                     zIndex: 0,
-                    opacity: 0.8
+                    opacity: 0.4
                 }}
             />
 
@@ -75,9 +75,33 @@ export default function Hero() {
                     borderRadius: '50%',
                     filter: 'blur(90px)',
                     zIndex: 0,
-                    opacity: 0.7
+                    opacity: 0.3
                 }}
             />
+
+            {/* Scroll Indicator */}
+            <motion.div
+                initial={{ opacity: 0, y: 0 }}
+                animate={{ opacity: 1, y: 10 }}
+                transition={{ delay: 3.5, duration: 1, repeat: Infinity, repeatType: 'reverse' }}
+                style={{
+                    position: 'absolute',
+                    bottom: '2rem',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    zIndex: 10,
+                    color: 'rgba(255, 255, 255, 0.5)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    fontSize: '0.8rem',
+                    letterSpacing: '0.2em'
+                }}
+            >
+                SCROLL
+                <div style={{ width: '1px', height: '40px', background: 'linear-gradient(to bottom, rgba(255,255,255,0.5), transparent)' }}></div>
+            </motion.div>
 
             <motion.div
                 style={{
@@ -103,7 +127,7 @@ export default function Hero() {
                             ease: [0.22, 1, 0.36, 1]
                         }}
                         style={{
-                            fontSize: 'clamp(3rem, 10vw, 8rem)',
+                            fontSize: 'clamp(2.5rem, 10vw, 8rem)',
                             fontWeight: 900,
                             letterSpacing: '-0.03em',
                             lineHeight: 0.9,
@@ -263,6 +287,38 @@ export default function Hero() {
                     >
                         Contact Me
                     </motion.button>
+                </motion.div>
+
+                {/* Social Links */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 2.8, duration: 0.8 }}
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        gap: '1.5rem',
+                        marginTop: '2rem'
+                    }}
+                >
+                    <motion.a
+                        href="https://github.com/nfsprogramming"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ y: -5, color: '#ff2e2e' }}
+                        style={{ color: 'rgba(255, 255, 255, 0.6)', transition: 'color 0.3s' }}
+                    >
+                        <Github size={24} />
+                    </motion.a>
+                    <motion.a
+                        href="https://linkedin.com/in/nfsprogramming"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ y: -5, color: '#0077b5' }}
+                        style={{ color: 'rgba(255, 255, 255, 0.6)', transition: 'color 0.3s' }}
+                    >
+                        <Linkedin size={24} />
+                    </motion.a>
                 </motion.div>
 
                 {/* Floating Tech Stack Ring */}

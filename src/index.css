@@ -313,6 +313,17 @@ p {
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* Utilities */
+.hidden-mobile {
+  display: flex;
+}
+
+@media (max-width: 1024px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+}
+
 /* Footer */
 .footer {
   padding: 4rem;
@@ -456,5 +467,9 @@ p {
   /* Tighter spacing for phone screens */
   .container {
     padding: 0 1rem;
+  }
+
+  .hero {
+    padding-top: 100px;
   }
 }

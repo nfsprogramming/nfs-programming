@@ -1,5 +1,5 @@
 import { motion, useInView } from 'framer-motion';
-import { Mail, Phone, Send } from 'lucide-react';
+import { Mail, Phone, Send, Github, Linkedin } from 'lucide-react';
 import { useRef } from 'react';
 
 export default function Contact() {
@@ -8,7 +8,9 @@ export default function Contact() {
 
     const contactItems = [
         { icon: Mail, text: 'nifrasempire25@gmail.com', href: 'mailto:nifrasempire25@gmail.com' },
-        { icon: Phone, text: '8925147213', href: 'tel:8925147213' }
+        { icon: Phone, text: '8925147213', href: 'tel:8925147213' },
+        { icon: Github, text: 'nfsprogramming', href: 'https://github.com/nfsprogramming' },
+        { icon: Linkedin, text: 'LinkedIn Profile', href: 'https://www.linkedin.com/' }
     ];
 
     return (

@@ -137,8 +137,8 @@ export default function Background3D() {
                         ctx.beginPath();
                         // Stronger opacity for mouse connections
                         let opacity = 1 - (distance / mouseDistance);
-                        ctx.strokeStyle = `rgba(255, 46, 46, ${opacity * 0.6})`; // Increased intensity
-                        ctx.lineWidth = 1.5; // Thicker capture lines
+                        ctx.strokeStyle = `rgba(255, 46, 46, ${opacity})`; // Max visibility
+                        ctx.lineWidth = 1 + opacity; // Variable thickness based on proximity
                         ctx.moveTo(mouse.x, mouse.y);
                         ctx.lineTo(particles[i].x, particles[i].y);
                         ctx.stroke();
