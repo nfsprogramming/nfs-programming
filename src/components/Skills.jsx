@@ -15,7 +15,7 @@ export default function Skills() {
     const isInView = useInView(ref, { once: true, margin: "-100px" });
 
     return (
-        <section id="skills" ref={ref} style={{ padding: '6rem 2rem', background: 'rgba(0,0,0,0.3)' }}>
+        <section id="skills" ref={ref} className="section-padding" style={{ background: 'rgba(0,0,0,0.3)' }}>
             <div className="container" style={{ maxWidth: '900px' }}>
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}

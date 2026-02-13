@@ -120,7 +120,8 @@ export default function Terminal() {
                             fontSize: 'inherit',
                             outline: 'none',
                             flex: 1,
-                            minWidth: '50px'
+                            width: '100%',
+                            minWidth: '0'
                         }}
                     />
                 </div>
