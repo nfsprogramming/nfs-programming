@@ -473,3 +473,68 @@ p {
     padding-top: 100px;
   }
 }
+
+/* Contact Grid Mobile Fixes */
+.contact-grid {
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+
+  .contact-grid .glass-card {
+    padding: 1.25rem;
+  }
+}
+
+/* Ensure proper mobile overflow handling */
+section {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Fix for workflow grid on small screens */
+@media (max-width: 640px) {
+  .workflow-grid {
+    gap: 2rem !important;
+  }
+}
+
+/* Terminal mobile adjustments */
+@media (max-width: 480px) {
+  .md-terminal {
+    font-size: 0.8rem !important;
+  }
+}
+
+/* Experience Card Mobile Adjustments */
+.experience-card {
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .experience-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .experience-card {
+    padding: 1.25rem;
+  }
+
+  .experience-card h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Skills Grid Mobile Fixes */
+@media (max-width: 768px) {
+  #skills .grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+  }
+}

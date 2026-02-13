@@ -25,7 +25,7 @@ export default function Contact() {
                     Get In <span className="text-accent">Touch</span>
                 </motion.h2>
 
-                <div className="grid grid-2" style={{ marginBottom: '4rem', maxWidth: '700px', margin: '0 auto 4rem auto', gap: '1rem' }}>
+                <div className="grid grid-2 contact-grid" style={{ marginBottom: '4rem', maxWidth: '700px', margin: '0 auto 4rem auto' }}>
                     {contactItems.map((item, index) => {
                         const Icon = item.icon;
                         return (

@@ -103,12 +103,12 @@ export default function Workflow() {
                                         .connector-line {
                                             position: absolute;
                                             top: 40px;
-                                            left: 50%;
+                                            left: 100%;
                                             width: 100%;
                                             height: 2px;
                                             background: linear-gradient(90deg, rgba(255,46,46,0.3), transparent);
                                             z-index: -1;
-                                            transform: translateX(50%);
+                                            transform: translateX(-50%);
                                         }
                                         @media (max-width: 1024px) {
                                             .connector-line { display: none; }
