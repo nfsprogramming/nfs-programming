@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowRight, Code, Cpu, Globe, Rocket, Terminal, Layers, Github, Linkedin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import Magnetic from './ui/Magnetic';
 
 export default function Hero() {
     const ref = useRef(null);
@@ -245,48 +246,52 @@ export default function Hero() {
                             }
                         }
                     `}</style>
-                    <motion.button
-                        className="cta-button"
-                        onClick={() => navigate('/projects')}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        style={{
-                            padding: '1rem 2.5rem',
-                            fontSize: '1.1rem',
-                            fontWeight: 700,
-                            borderRadius: '50px',
-                            background: 'linear-gradient(135deg, #ff2e2e, #ff6b6b)',
-                            color: 'white',
-                            border: 'none',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.5rem',
-                            boxShadow: '0 4px 20px rgba(255, 46, 46, 0.4)'
-                        }}
-                    >
-                        Explore Work <ArrowRight size={20} />
-                    </motion.button>
+                    <Magnetic>
+                        <motion.button
+                            className="cta-button"
+                            onClick={() => navigate('/projects')}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            style={{
+                                padding: '1rem 2.5rem',
+                                fontSize: '1.1rem',
+                                fontWeight: 700,
+                                borderRadius: '50px',
+                                background: 'linear-gradient(135deg, #ff2e2e, #ff6b6b)',
+                                color: 'white',
+                                border: 'none',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.5rem',
+                                boxShadow: '0 4px 20px rgba(255, 46, 46, 0.4)'
+                            }}
+                        >
+                            Explore Work <ArrowRight size={20} />
+                        </motion.button>
+                    </Magnetic>
 
-                    <motion.button
-                        className="cta-button"
-                        onClick={() => navigate('/contact')}
-                        whileHover={{ scale: 1.05, background: 'rgba(255, 255, 255, 0.1)' }}
-                        whileTap={{ scale: 0.95 }}
-                        style={{
-                            padding: '1rem 2.5rem',
-                            fontSize: '1.1rem',
-                            fontWeight: 700,
-                            borderRadius: '50px',
-                            background: 'transparent',
-                            color: 'white',
-                            border: '1px solid rgba(255, 255, 255, 0.2)',
-                            cursor: 'pointer',
-                            backdropFilter: 'blur(10px)'
-                        }}
-                    >
-                        Contact Me
-                    </motion.button>
+                    <Magnetic>
+                        <motion.button
+                            className="cta-button"
+                            onClick={() => navigate('/contact')}
+                            whileHover={{ scale: 1.05, background: 'rgba(255, 255, 255, 0.1)' }}
+                            whileTap={{ scale: 0.95 }}
+                            style={{
+                                padding: '1rem 2.5rem',
+                                fontSize: '1.1rem',
+                                fontWeight: 700,
+                                borderRadius: '50px',
+                                background: 'transparent',
+                                color: 'white',
+                                border: '1px solid rgba(255, 255, 255, 0.2)',
+                                cursor: 'pointer',
+                                backdropFilter: 'blur(10px)'
+                            }}
+                        >
+                            Contact Me
+                        </motion.button>
+                    </Magnetic>
                 </motion.div>
 
                 {/* Social Links */}

@@ -14,6 +14,25 @@ const commands = {
     sudo: "Permission denied: You are not authorized."
 };
 
+const Typewriter = ({ text, speed = 15 }) => {
+    const [displayedText, setDisplayedText] = useState('');
+
+    useEffect(() => {
+        let i = 0;
+        const timer = setInterval(() => {
+            if (i < text.length) {
+                setDisplayedText(() => text.substring(0, i + 1));
+                i++;
+            } else {
+                clearInterval(timer);
+            }
+        }, speed);
+        return () => clearInterval(timer);
+    }, [text, speed]);
+
+    return <span>{displayedText}</span>;
+};
+
 export default function Terminal() {
     const [history, setHistory] = useState([
         { type: 'info', content: 'Welcome to NFS Terminal v1.0.0' },
@@ -99,7 +118,12 @@ export default function Terminal() {
                                 line.type === 'info' ? '#888' :
                                     'inherit'
                         }}>
-                            {line.content}
+                            {/* Only type out system outputs, not user input */}
+                            {line.type === 'input' ? (
+                                line.content
+                            ) : (
+                                <Typewriter text={line.content} />
+                            )}
                         </span>
                     </div>
                 ))}

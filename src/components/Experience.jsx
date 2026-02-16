@@ -1,6 +1,9 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import { useRef } from 'react';
 import { Briefcase, Calendar } from 'lucide-react';
+import TiltCard from './ui/TiltCard';
+import RevealOnScroll from './ui/RevealOnScroll';
+import Scroll3DSection from './ui/Scroll3DSection';
 
 const experiences = [
     {
@@ -32,97 +35,89 @@ export default function Experience() {
 
     return (
         <section id="experience" className="container section-padding" ref={ref}>
-            <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-                style={{ textAlign: 'center', marginBottom: '5rem' }}
-            >
-                Professional <span className="text-accent">Journey</span>
-            </motion.h2>
+            <Scroll3DSection>
+                <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+                    <RevealOnScroll width="100%">
+                        <h2 className="text-center">
+                            Professional <span className="text-accent">Journey</span>
+                        </h2>
+                    </RevealOnScroll>
+                </div>
 
-            <div style={{ position: 'relative', maxWidth: '800px', margin: '0 auto' }}>
-                {/* Center Line */}
-                <motion.div
-                    style={{
-                        position: 'absolute',
-                        left: '0px',
-                        top: 0,
-                        bottom: 0,
-                        width: '2px',
-                        background: 'rgba(255, 255, 255, 0.1)',
-                        transform: 'translateX(50%)',
-                        scaleY: scrollYProgress
-                    }}
-                    className="md-center-line"
-                />
-
-                {/* Mobile: Line is on the left */}
-                <style>{`
-                    @media (min-width: 768px) {
-                        .md-center-line {
-                            left: 50% !important;
-                        }
-                    }
-                `}</style>
-
-                {experiences.map((exp, index) => (
-                    <div
-                        key={index}
-                        className={`experience-item flex ${index % 2 === 0 ? 'row' : 'row-reverse'}`}
+                <div style={{ position: 'relative', maxWidth: '800px', margin: '0 auto' }}>
+                    {/* Center Line */}
+                    <motion.div
                         style={{
-                            marginBottom: '4rem',
-                            position: 'relative',
-                            paddingLeft: '2rem' // Mobile default
+                            position: 'absolute',
+                            left: '0px',
+                            top: 0,
+                            bottom: 0,
+                            width: '2px',
+                            background: 'rgba(255, 255, 255, 0.1)',
+                            transform: 'translateX(50%)',
+                            scaleY: scrollYProgress
                         }}
-                    >
-                        {/* Styles for desktop alignment handled via media query blocks or inline conditional logic is tricky. 
-                             Let's use a simpler approach: A clean vertical list with the line on the left for all sizes 
-                             to ensure perfect responsiveness, or a proper side-by-side for desktop.
-                             
-                             Let's go with a modern "Left-aligned with nodes" look which is cleaner on mobile.
-                          */}
+                        className="md-center-line"
+                    />
 
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.2 }}
-                            viewport={{ once: true }}
+                    <style>{`
+                        @media (min-width: 768px) {
+                            .md-center-line {
+                                left: 50% !important;
+                            }
+                        }
+                    `}</style>
+
+                    {experiences.map((exp, index) => (
+                        <div
+                            key={index}
+                            className={`experience-item flex ${index % 2 === 0 ? 'row' : 'row-reverse'}`}
                             style={{
-                                borderLeft: '2px solid rgba(255, 46, 46, 0.3)',
-                                paddingLeft: '2rem',
-                                position: 'relative'
+                                marginBottom: '4rem',
+                                position: 'relative',
+                                paddingLeft: '2rem' // Mobile default
                             }}
                         >
-                            {/* Node */}
-                            <div style={{
-                                position: 'absolute',
-                                left: '-9px',
-                                top: '0',
-                                width: '16px',
-                                height: '16px',
-                                borderRadius: '50%',
-                                background: 'var(--accent-color)',
-                                boxShadow: '0 0 10px rgba(255, 46, 46, 0.6)'
-                            }} />
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.5, delay: index * 0.2 }}
+                                viewport={{ once: true }}
+                                style={{
+                                    borderLeft: '2px solid rgba(255, 46, 46, 0.3)',
+                                    paddingLeft: '2rem',
+                                    position: 'relative'
+                                }}
+                            >
+                                {/* Node */}
+                                <div style={{
+                                    position: 'absolute',
+                                    left: '-9px',
+                                    top: '0',
+                                    width: '16px',
+                                    height: '16px',
+                                    borderRadius: '50%',
+                                    background: 'var(--accent-color)',
+                                    boxShadow: '0 0 10px rgba(255, 46, 46, 0.6)'
+                                }} />
 
-                            <div className="glass-card" style={{ padding: '2rem' }}>
-                                <div className="flex gap-2" style={{ marginBottom: '0.5rem', opacity: 0.7, fontSize: '0.9rem' }}>
-                                    <Calendar size={14} /> {exp.period}
-                                </div>
-                                <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'white' }}>{exp.role}</h3>
-                                <div className="flex gap-2" style={{ marginBottom: '1.5rem', color: 'var(--accent-color)', alignItems: 'center' }}>
-                                    <Briefcase size={16} /> {exp.company}
-                                </div>
-                                <p style={{ lineHeight: 1.6, color: '#ccc' }}>
-                                    {exp.description}
-                                </p>
-                            </div>
-                        </motion.div>
-                    </div>
-                ))}
-            </div>
+                                <TiltCard className="glass-card" style={{ padding: '2rem' }}>
+                                    <div className="flex gap-2" style={{ marginBottom: '0.5rem', opacity: 0.7, fontSize: '0.9rem' }}>
+                                        <Calendar size={14} /> {exp.period}
+                                    </div>
+                                    <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'white' }}>{exp.role}</h3>
+                                    <div className="flex gap-2" style={{ marginBottom: '1.5rem', color: 'var(--accent-color)', alignItems: 'center' }}>
+                                        <Briefcase size={16} /> {exp.company}
+                                    </div>
+                                    <p style={{ lineHeight: 1.6, color: '#ccc' }}>
+                                        {exp.description}
+                                    </p>
+                                </TiltCard>
+                            </motion.div>
+                        </div>
+                    ))}
+                </div>
+            </Scroll3DSection>
         </section>
     );
 }

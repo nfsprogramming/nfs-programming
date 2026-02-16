@@ -57,6 +57,18 @@ body {
   background: #050505;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+
+  a,
+  button,
+  [role="button"] {
+    cursor: none;
+  }
+}
+
 ::-webkit-scrollbar-thumb {
   background-color: #333;
   border-radius: 20px;

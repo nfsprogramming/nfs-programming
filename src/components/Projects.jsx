@@ -1,6 +1,10 @@
-import { motion, useInView } from 'framer-motion';
-import { Github } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import { ExternalLink, Github, Code2, Globe } from 'lucide-react';
+import TiltCard from './ui/TiltCard';
+import RevealOnScroll from './ui/RevealOnScroll';
+import TextReveal from './ui/TextReveal';
+import Parallax3D from './ui/Parallax3D';
+import Scroll3DSection from './ui/Scroll3DSection';
 
 const projects = [
     {
@@ -17,7 +21,7 @@ const projects = [
     },
     {
         title: "Image Generator using NLP",
-        description: "Advanced image generation system powered by Natural Language Processing, transforming text descriptions into visual content.",
+        description: "Advanced image generation system powered by Natural Language Processing to help users create images from text descriptions.",
         tags: ["Python", "NLP", "Image Gen"],
         github: "https://github.com/nfsprogramming/image-generator-using-NLP"
     },
@@ -42,157 +46,77 @@ const projects = [
 ];
 
 export default function Projects() {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-100px" });
-    const [hoveredIndex, setHoveredIndex] = useState(null);
-
-    // Spotlight State
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-    const handleMouseMove = (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        setMousePosition({
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top
-        });
-    };
-
     return (
-        <section id="projects" className="container section-padding" ref={ref} style={{ position: 'relative' }}>
-            {/* Floating background elements */}
-            <motion.div
-                animate={{
-                    rotate: [0, 360],
-                    scale: [1, 1.1, 1]
-                }}
-                transition={{
-                    duration: 30,
-                    repeat: Infinity,
-                    ease: "linear"
-                }}
-                style={{
-                    position: 'absolute',
-                    top: '10%',
-                    right: '5%',
-                    width: 'min(300px, 50vw)',
-                    height: 'min(300px, 50vw)',
-                    background: 'radial-gradient(circle, rgba(255, 46, 46, 0.05) 0%, transparent 70%)',
-                    borderRadius: '50%',
-                    filter: 'blur(40px)',
-                    zIndex: 0,
-                    pointerEvents: 'none'
-                }}
-            />
+        <section id="projects" className="container section-padding" style={{ position: 'relative' }}>
+            <Scroll3DSection>
+                <div style={{ marginBottom: '4rem', textAlign: 'center' }}>
+                    <RevealOnScroll width="100%">
+                        <h2 className="text-center">
+                            Featured <span className="text-accent">Projects</span>
+                        </h2>
+                    </RevealOnScroll>
+                </div>
 
-            <motion.h2
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.8, type: "spring" }}
-                style={{ position: 'relative', zIndex: 1, marginBottom: '4rem' }}
-            >
-                Featured <span className="text-accent" style={{ display: 'inline-block', borderBottom: '2px solid rgba(255, 46, 46, 0.5)' }}>Projects</span>
-            </motion.h2>
-
-            <div className="grid grid-3" style={{ position: 'relative', zIndex: 1 }}>
-                {projects.map((project, index) => (
-                    <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 80 }}
-                        animate={isInView ? { opacity: 1, y: 0 } : {}}
-                        transition={{
-                            delay: index * 0.1, // Faster stagger
-                            duration: 0.8,
-                            ease: [0.22, 1, 0.36, 1]
-                        }}
-                        onHoverStart={() => setHoveredIndex(index)}
-                        onHoverEnd={() => setHoveredIndex(null)}
-                        onMouseMove={handleMouseMove}
-                        className="glass-card"
-                        whileHover={{ y: -5 }}
-                        style={{
-                            position: 'relative',
-                            transition: 'border-color 0.3s ease',
-                            background: 'rgba(20, 20, 20, 0.4)',
-                            borderColor: hoveredIndex === index
-                                ? 'rgba(255, 46, 46, 0.5)'
-                                : 'rgba(255, 255, 255, 0.05)',
-                            overflow: 'hidden'
-                        }}
-                    >
-                        {/* Spotlight Effect */}
-                        {hoveredIndex === index && (
-                            <div
+                <div className="grid grid-3" style={{ position: 'relative', zIndex: 1 }}>
+                    {projects.map((project, index) => (
+                        <Parallax3D key={index} offset={index % 3 === 1 ? 40 : index % 3 === 2 ? 80 : 0} className="h-full">
+                            <TiltCard
+                                className="glass-card"
                                 style={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 0,
-                                    background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 46, 46, 0.15), transparent 40%)`,
-                                    pointerEvents: 'none',
-                                    zIndex: 0
+                                    height: '100%',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    padding: '2rem',
                                 }}
-                            />
-                        )}
-
-                        <div style={{ position: 'relative', zIndex: 1 }}>
-                            <motion.h3
-                                style={{ color: 'white', marginBottom: '0.5rem', fontSize: '1.4rem' }}
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                                transition={{ delay: index * 0.1 + 0.2 }}
                             >
-                                {project.title}
-                            </motion.h3>
+                                <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', height: '100%' }}>
+                                    <div style={{ marginBottom: '0.5rem' }}>
+                                        <TextReveal
+                                            text={project.title}
+                                            className="text-xl font-bold text-white"
+                                            delay={index * 0.1 + 0.3}
+                                        />
+                                    </div>
 
-                            <motion.p
-                                style={{ marginBottom: '1.5rem', lineHeight: 1.6, fontSize: '0.95rem' }}
-                                initial={{ opacity: 0 }}
-                                animate={isInView ? { opacity: 1 } : {}}
-                                transition={{ delay: index * 0.1 + 0.3 }}
-                            >
-                                {project.description}
-                            </motion.p>
+                                    <p style={{ marginBottom: '1.5rem', lineHeight: 1.6, fontSize: '0.95rem', flexGrow: 1, color: '#aaa' }}>
+                                        {project.description}
+                                    </p>
 
-                            <div className="flex project-tags gap-2" style={{ marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-                                {project.tags.map((tag, i) => (
-                                    <motion.span
-                                        key={tag}
-                                        whileHover={{
-                                            scale: 1.05,
-                                            backgroundColor: 'rgba(255, 46, 46, 0.2)',
-                                            borderColor: 'rgba(255, 46, 46, 0.4)',
-                                            transition: { duration: 0.2 }
-                                        }}
-                                        style={{ cursor: 'default' }}
-                                    >
-                                        {tag}
-                                    </motion.span>
-                                ))}
-                            </div>
+                                    <div className="flex project-tags gap-2" style={{ marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+                                        {project.tags.map((tag) => (
+                                            <span
+                                                key={tag}
+                                                style={{
+                                                    background: 'rgba(255, 255, 255, 0.05)',
+                                                    padding: '4px 12px',
+                                                    borderRadius: '20px',
+                                                    fontSize: '0.75rem',
+                                                    color: '#ccc',
+                                                    border: '1px solid rgba(255, 255, 255, 0.05)',
+                                                }}
+                                            >
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
 
-                            <motion.div
-                                className="flex gap-4"
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                                transition={{ delay: index * 0.1 + 0.6 }}
-                            >
-                                <motion.a
-                                    href={project.github}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2"
-                                    style={{ fontSize: '0.9rem', textDecoration: 'none', color: 'inherit' }}
-                                    whileHover={{ scale: 1.05, color: '#ff2e2e' }}
-                                    whileTap={{ scale: 0.95 }}
-                                >
-                                    <Github size={16} /> View Code
-                                </motion.a>
-                            </motion.div>
-                        </div>
-                    </motion.div>
-                ))}
-            </div>
+                                    <div className="flex gap-4">
+                                        <a
+                                            href={project.github}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center gap-2"
+                                            style={{ fontSize: '0.9rem', textDecoration: 'none', color: 'inherit', fontWeight: '500' }}
+                                        >
+                                            <Github size={18} className="text-accent" /> View Code
+                                        </a>
+                                    </div>
+                                </div>
+                            </TiltCard>
+                        </Parallax3D>
+                    ))}
+                </div>
+            </Scroll3DSection>
         </section>
     );
 }

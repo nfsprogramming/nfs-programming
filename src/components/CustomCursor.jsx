@@ -45,7 +45,7 @@ export default function CustomCursor() {
             window.removeEventListener('mousedown', handleMouseDown);
             window.removeEventListener('mouseup', handleMouseUp);
         };
-    }, [cursorX, cursorY]);
+    }, [cursorX, cursorY, isVisible]);
 
 
 
@@ -70,11 +70,11 @@ export default function CustomCursor() {
                     translateY: '-50%',
                     width: '8px',
                     height: '8px',
-                    backgroundColor: '#ff2e2e',
+                    backgroundColor: isHovering ? '#fff' : '#ff2e2e',
                     borderRadius: '50%',
                     pointerEvents: 'none',
                     zIndex: 9999,
-                    mixBlendMode: 'difference'
+                    boxShadow: isHovering ? '0 0 10px rgba(255, 255, 255, 0.5)' : 'none'
                 }}
             />
             {/* Trailing Ring - follows with physics */}
@@ -89,20 +89,23 @@ export default function CustomCursor() {
                     translateY: '-50%',
                     width: '32px',
                     height: '32px',
-                    border: '1px solid white',
+                    border: '1px solid',
                     borderRadius: '50%',
                     pointerEvents: 'none',
                     zIndex: 9998,
-                    mixBlendMode: 'difference'
+                    mixBlendMode: 'difference',
+                    backdropFilter: 'blur(1px)'
                 }}
                 animate={{
-                    scale: isClicked ? 0.8 : isHovering ? 1.5 : 1,
-                    opacity: isHovering ? 0.8 : 0.4,
-                    borderColor: isClicked ? '#ff2e2e' : isHovering ? '#ff2e2e' : 'rgba(255, 255, 255, 0.5)',
-                    borderWidth: isClicked ? '2px' : '1px'
+                    scale: isClicked ? 0.8 : isHovering ? 2 : 1, // Larger scale on hover
+                    opacity: isHovering ? 1 : 0.4,
+                    borderColor: isHovering ? '#ffffff' : '#ff2e2e', // White on hover, red default
+                    borderWidth: isClicked ? '2px' : '1px',
+                    backgroundColor: isHovering ? 'rgba(255, 255, 255, 0.1)' : 'transparent' // Subtle fill on hover
                 }}
                 transition={{
-                    duration: 0.15
+                    duration: 0.2,
+                    ease: "circOut"
                 }}
             />
         </div>
