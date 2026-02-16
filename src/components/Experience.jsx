@@ -55,7 +55,8 @@ export default function Experience() {
                             width: '2px',
                             background: 'rgba(255, 255, 255, 0.1)',
                             transform: 'translateX(50%)',
-                            scaleY: scrollYProgress
+                            scaleY: scrollYProgress,
+                            originY: 0
                         }}
                         className="md-center-line"
                     />

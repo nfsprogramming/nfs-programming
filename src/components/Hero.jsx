@@ -237,7 +237,7 @@ export default function Hero() {
                     <style>{`
                         @media (max-width: 768px) {
                             .cta-container {
-                                flexDirection: column;
+                                flex-direction: column;
                                 width: 100%;
                             }
                             .cta-button {

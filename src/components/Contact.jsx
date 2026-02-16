@@ -27,62 +27,52 @@ export default function Contact() {
                         </h2>
                     </RevealOnScroll>
 
-                    <div className="grid grid-2" style={{ marginBottom: '4rem', maxWidth: '700px', margin: '0 auto 4rem auto', gap: '1rem' }}>
+                    <div className="grid grid-2" style={{ marginBottom: '4rem', maxWidth: '700px', margin: '0 auto 4rem auto', gap: '1.5rem' }}>
                         {contactItems.map((item, index) => {
                             const Icon = item.icon;
                             return (
-                                <TiltCard
+                                <motion.a
                                     key={index}
+                                    href={item.href}
                                     initial={{ opacity: 0, x: index === 0 ? -30 : 30 }}
                                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                                     transition={{ delay: index * 0.2, duration: 0.8 }}
-                                    style={{
-                                        background: 'rgba(20, 20, 20, 0.4)',
-                                        backdropFilter: 'blur(20px)',
-                                        WebkitBackdropFilter: 'blur(20px)',
-                                        border: '1px solid rgba(255, 255, 255, 0.05)',
-                                        borderRadius: '20px',
-                                        padding: '0',
-                                        overflow: 'hidden'
-                                    }}
+                                    style={{ textDecoration: 'none', display: 'block' }}
                                 >
-                                    <a
-                                        href={item.href}
-                                        style={{
-                                            textDecoration: 'none',
-                                            color: 'inherit',
+                                    <TiltCard
+                                        className="glass-card"
+                                        style={{ padding: '1.5rem 2rem', height: '100%' }}
+                                    >
+                                        <div style={{
                                             display: 'flex',
                                             flexDirection: 'row',
                                             alignItems: 'center',
                                             gap: '1.5rem',
-                                            padding: '1.5rem 2rem',
-                                            textAlign: 'left',
-                                            width: '100%',
                                             height: '100%'
-                                        }}
-                                    >
-                                        <div
-                                            style={{
-                                                width: '50px',
-                                                height: '50px',
-                                                background: 'rgba(255, 46, 46, 0.1)',
-                                                borderRadius: '50%',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                border: '1px solid rgba(255, 46, 46, 0.2)',
-                                                flexShrink: 0
-                                            }}
-                                        >
-                                            <Icon className="text-accent" size={20} />
+                                        }}>
+                                            <div
+                                                style={{
+                                                    width: '50px',
+                                                    height: '50px',
+                                                    background: 'rgba(255, 46, 46, 0.1)',
+                                                    borderRadius: '50%',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    border: '1px solid rgba(255, 46, 46, 0.2)',
+                                                    flexShrink: 0
+                                                }}
+                                            >
+                                                <Icon className="text-accent" size={20} />
+                                            </div>
+                                            <div style={{ overflow: 'hidden' }}>
+                                                <p style={{ fontSize: '0.9rem', fontWeight: 500, margin: 0, color: 'white', textAlign: 'left' }}>
+                                                    {item.text}
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div style={{ overflow: 'hidden' }}>
-                                            <p style={{ fontSize: '0.9rem', fontWeight: 500, margin: 0 }}>
-                                                {item.text}
-                                            </p>
-                                        </div>
-                                    </a>
-                                </TiltCard>
+                                    </TiltCard>
+                                </motion.a>
                             );
                         })}
                     </div>

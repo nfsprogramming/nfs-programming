@@ -69,8 +69,6 @@ export default function Workflow() {
                         <TiltCard
                             key={index}
                             initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }} // Changed to animate to ensure it stays visible once loaded? No, stick to whileInView pattern or use TiltCard props properly.
-                            // TiltCard uses motion.div under the hood and passes ...props.
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.2, duration: 0.5 }}
@@ -102,10 +100,6 @@ export default function Workflow() {
                             }}>
                                 <Icon size={32} className="text-accent" />
                             </div>
-
-                            {/* Connector Line (Desktop Only) - Might look weird inside card, let's remove or adapt */}
-                            {/* Actually, connecting CARDS is harder. Let's remove the connector line for cleaner card look, or keep it behind cards? */}
-                            {/* If I use cards, the line breaking is expected. I will remove the line to favor the card aesthetic. */}
 
                             <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>{step.title}</h3>
                             <p style={{ color: '#ccc', lineHeight: '1.6', fontSize: '0.95rem' }}>
