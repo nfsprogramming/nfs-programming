@@ -1,17 +1,25 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { useRef, useEffect } from 'react';
 import { ArrowRight, Code, Cpu, Globe, Rocket, Terminal, Layers, Github, Linkedin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Magnetic from './ui/Magnetic';
 
 export default function Hero() {
     const ref = useRef(null);
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+    const smoothMouseX = useSpring(mouseX, { stiffness: 80, damping: 20, mass: 0.5 });
+    const smoothMouseY = useSpring(mouseY, { stiffness: 80, damping: 20, mass: 0.5 });
+
     const navigate = useNavigate();
 
     // Scroll Parallax
     const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+    const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+    const parallaxX = useTransform(smoothMouseX, [-50, 50], ["-2%", "2%"]);
+    const parallaxY = useTransform(smoothMouseY, [-50, 50], ["-2%", "2%"]);
 
     const techs = [
         { icon: Code, label: "React" },
@@ -21,6 +29,23 @@ export default function Hero() {
         { icon: Layers, label: "Python" },
         { icon: Rocket, label: "Next.js" }
     ];
+
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            const relativeX = (e.clientX - centerX) / centerX;
+            const relativeY = (e.clientY - centerY) / centerY;
+            mouseX.set(relativeX * 50);
+            mouseY.set(relativeY * 50);
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+        };
+    }, [mouseX, mouseY]);
 
     return (
         <section id="hero" className="hero" ref={ref} style={{ position: 'relative', overflow: 'hidden', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -111,6 +136,8 @@ export default function Hero() {
                     textAlign: 'center',
                     y,
                     opacity,
+                    x: parallaxX,
+                    translateY: parallaxY,
                     maxWidth: '1200px',
                     padding: '0 2rem'
                 }}

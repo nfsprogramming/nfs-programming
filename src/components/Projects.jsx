@@ -59,60 +59,122 @@ export default function Projects() {
 
                 <div className="grid grid-3" style={{ position: 'relative', zIndex: 1 }}>
                     {projects.map((project, index) => (
-                        <Parallax3D key={index} offset={index % 3 === 1 ? 40 : index % 3 === 2 ? 80 : 0} className="h-full">
-                            <TiltCard
-                                className="glass-card"
-                                style={{
-                                    height: '100%',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    padding: '2rem',
+                        <Parallax3D
+                            key={index}
+                            offset={index % 3 === 1 ? 40 : index % 3 === 2 ? 80 : 0}
+                            className="h-full"
+                        >
+                            <motion.div
+                                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                                viewport={{ once: true, amount: 0.3 }}
+                                transition={{
+                                    delay: index * 0.1,
+                                    duration: 0.6,
+                                    ease: [0.22, 1, 0.36, 1],
                                 }}
+                                style={{ height: '100%' }}
                             >
-                                <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', height: '100%' }}>
-                                    <div style={{ marginBottom: '0.5rem' }}>
-                                        <TextReveal
-                                            text={project.title}
-                                            className="text-xl font-bold text-white"
-                                            delay={index * 0.1 + 0.3}
-                                        />
-                                    </div>
+                                <TiltCard
+                                    className="glass-card"
+                                    style={{
+                                        height: '100%',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        padding: '2rem',
+                                        position: 'relative',
+                                        overflow: 'hidden',
+                                    }}
+                                >
+                                    <motion.div
+                                        initial={{ opacity: 0 }}
+                                        whileHover={{ opacity: 1 }}
+                                        transition={{ duration: 0.3 }}
+                                        style={{
+                                            position: 'absolute',
+                                            inset: 0,
+                                            background:
+                                                'radial-gradient(circle at top left, rgba(255,46,46,0.25), transparent 55%)',
+                                            pointerEvents: 'none',
+                                            mixBlendMode: 'screen',
+                                            zIndex: 0,
+                                        }}
+                                    />
 
-                                    <p style={{ marginBottom: '1.5rem', lineHeight: 1.6, fontSize: '0.95rem', flexGrow: 1, color: '#aaa' }}>
-                                        {project.description}
-                                    </p>
+                                    <div
+                                        style={{
+                                            position: 'relative',
+                                            zIndex: 1,
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            height: '100%',
+                                        }}
+                                    >
+                                        <div style={{ marginBottom: '0.5rem' }}>
+                                            <TextReveal
+                                                text={project.title}
+                                                className="text-xl font-bold text-white"
+                                                delay={index * 0.1 + 0.3}
+                                            />
+                                        </div>
 
-                                    <div className="flex project-tags gap-2" style={{ marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-                                        {project.tags.map((tag) => (
-                                            <span
-                                                key={tag}
-                                                style={{
-                                                    background: 'rgba(255, 255, 255, 0.05)',
-                                                    padding: '4px 12px',
-                                                    borderRadius: '20px',
-                                                    fontSize: '0.75rem',
-                                                    color: '#ccc',
-                                                    border: '1px solid rgba(255, 255, 255, 0.05)',
-                                                }}
-                                            >
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-
-                                    <div className="flex gap-4">
-                                        <a
-                                            href={project.github}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="flex items-center gap-2"
-                                            style={{ fontSize: '0.9rem', textDecoration: 'none', color: 'inherit', fontWeight: '500' }}
+                                        <p
+                                            style={{
+                                                marginBottom: '1.5rem',
+                                                lineHeight: 1.6,
+                                                fontSize: '0.95rem',
+                                                flexGrow: 1,
+                                                color: '#aaa',
+                                            }}
                                         >
-                                            <Github size={18} className="text-accent" /> View Code
-                                        </a>
+                                            {project.description}
+                                        </p>
+
+                                        <div
+                                            className="flex project-tags gap-2"
+                                            style={{ marginBottom: '1.5rem', flexWrap: 'wrap' }}
+                                        >
+                                            {project.tags.map((tag) => (
+                                                <span
+                                                    key={tag}
+                                                    style={{
+                                                        background: 'rgba(255, 255, 255, 0.05)',
+                                                        padding: '4px 12px',
+                                                        borderRadius: '20px',
+                                                        fontSize: '0.75rem',
+                                                        color: '#ccc',
+                                                        border: '1px solid rgba(255, 255, 255, 0.05)',
+                                                    }}
+                                                >
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                        </div>
+
+                                        <div
+                                            className="flex gap-4"
+                                            style={{ alignItems: 'center', marginTop: 'auto' }}
+                                        >
+                                            <motion.a
+                                                href={project.github}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex items-center gap-2"
+                                                style={{
+                                                    fontSize: '0.9rem',
+                                                    textDecoration: 'none',
+                                                    color: 'inherit',
+                                                    fontWeight: 500,
+                                                }}
+                                                whileHover={{ x: 4 }}
+                                                transition={{ type: 'spring', stiffness: 250, damping: 20 }}
+                                            >
+                                                <Github size={18} className="text-accent" /> View Code
+                                            </motion.a>
+                                        </div>
                                     </div>
-                                </div>
-                            </TiltCard>
+                                </TiltCard>
+                            </motion.div>
                         </Parallax3D>
                     ))}
                 </div>
