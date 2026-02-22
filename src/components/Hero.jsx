@@ -122,7 +122,8 @@ export default function Hero() {
                     alignItems: 'center',
                     gap: '0.5rem',
                     fontSize: '0.8rem',
-                    letterSpacing: '0.2em'
+                    letterSpacing: '0.2em',
+                    textIndent: '0.2em'
                 }}
             >
                 SCROLL

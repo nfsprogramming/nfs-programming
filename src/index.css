@@ -18,7 +18,8 @@
 
   /* Layout constraints */
   --container-max-width: 1400px;
-  --section-padding: var(--space-xl);
+  --navbar-height: 80px;
+  --section-padding: clamp(6rem, 8vw, 10rem);
 }
 
 * {
@@ -128,6 +129,7 @@ h2 {
   margin-bottom: var(--space-lg);
   text-align: center;
   font-weight: 800;
+  line-height: 1.2;
 }
 
 h3 {
@@ -179,7 +181,7 @@ p {
 
 .section-padding {
   padding-top: var(--section-padding);
-  padding-bottom: calc(var(--section-padding) / 2);
+  padding-bottom: var(--space-lg);
 }
 
 @media (max-width: 768px) {
