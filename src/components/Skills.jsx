@@ -17,7 +17,7 @@ export default function Skills() {
 
     return (
         <section id="skills" ref={ref} className="section-padding" style={{ background: 'rgba(0,0,0,0.3)' }}>
-            <div className="container" style={{ maxWidth: '900px' }}>
+            <div className="container">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}

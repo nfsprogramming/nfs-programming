@@ -74,7 +74,7 @@ export default function Terminal() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="md-terminal"
+            className="md-terminal auto-layout"
             style={{
                 background: '#0a0a0a',
                 borderRadius: '12px',
@@ -82,9 +82,10 @@ export default function Terminal() {
                 overflow: 'hidden',
                 fontFamily: '"Fira Code", monospace',
                 boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
-                marginTop: '1rem',
+                marginTop: 'var(--space-md)',
                 width: '100%',
-                maxWidth: '700px'
+                maxWidth: '800px',
+                margin: '0 auto'
             }}
         >
             {/* Terminal Header */}
@@ -107,7 +108,17 @@ export default function Terminal() {
             </div>
 
             {/* Terminal Body */}
-            <div style={{ padding: '1.5rem', minHeight: '300px', maxHeight: '300px', overflowY: 'auto', color: '#e0e0e0', fontSize: '0.9rem' }}>
+            <div
+                className="terminal-body"
+                style={{
+                    padding: 'var(--space-md)',
+                    minHeight: '300px',
+                    maxHeight: '400px',
+                    overflowY: 'auto',
+                    color: '#e0e0e0',
+                    fontSize: 'clamp(0.8rem, 2vw, 0.95rem)'
+                }}
+            >
                 {history.map((line, i) => (
                     <div key={i} style={{ marginBottom: '0.5rem', lineHeight: '1.5' }}>
                         {line.type === 'input' && (

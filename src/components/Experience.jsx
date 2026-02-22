@@ -44,7 +44,7 @@ export default function Experience() {
                     </RevealOnScroll>
                 </div>
 
-                <div style={{ position: 'relative', maxWidth: '800px', margin: '0 auto' }}>
+                <div style={{ position: 'relative', margin: '0 auto' }}>
                     {/* Center Line */}
                     <motion.div
                         style={{

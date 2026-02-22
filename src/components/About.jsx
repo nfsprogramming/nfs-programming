@@ -46,14 +46,14 @@ export default function About() {
                 </div>
 
                 <motion.div
-                    className="grid grid-2"
+                    className="grid-2"
                     variants={containerVariants}
                     initial="hidden"
                     animate={isInView ? "visible" : "hidden"}
                     style={{ alignItems: 'start' }}
                 >
                     {/* Portrait Column */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                    <div className="auto-layout">
                         <motion.div variants={itemVariants}>
                             <TiltCard className="glass-card" style={{ padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                                 <motion.img
@@ -88,7 +88,7 @@ export default function About() {
                     </div>
 
                     {/* Bio & Terminal Column */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                    <div className="auto-layout">
                         <motion.div variants={itemVariants}>
                             <TiltCard className="glass-card">
                                 <h3 className="text-accent" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>

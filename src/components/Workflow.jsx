@@ -43,26 +43,7 @@ export default function Workflow() {
                 </p>
             </motion.div>
 
-            <div className="workflow-grid">
-                <style>{`
-                    .workflow-grid {
-                        display: grid;
-                        grid-template-columns: repeat(1, 1fr);
-                        gap: 3rem;
-                        position: relative;
-                    }
-                    @media (min-width: 640px) {
-                        .workflow-grid {
-                            grid-template-columns: repeat(2, 1fr);
-                        }
-                    }
-                    @media (min-width: 1024px) {
-                        .workflow-grid {
-                            grid-template-columns: repeat(4, 1fr);
-                            gap: 1rem;
-                        }
-                    }
-                `}</style>
+            <div className="grid">
                 {steps.map((step, index) => {
                     const Icon = step.icon;
                     return (

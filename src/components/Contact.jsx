@@ -20,14 +20,14 @@ export default function Contact() {
     return (
         <section id="contact" ref={ref} className="section-padding" style={{ position: 'relative', overflow: 'hidden' }}>
             <Scroll3DSection>
-                <div className="container text-center" style={{ maxWidth: '800px', position: 'relative', zIndex: 1 }}>
+                <div className="container text-center" style={{ position: 'relative', zIndex: 1 }}>
                     <RevealOnScroll width="100%">
                         <h2 style={{ marginBottom: '3rem' }}>
                             Get In <span className="text-accent">Touch</span>
                         </h2>
                     </RevealOnScroll>
 
-                    <div className="grid grid-2" style={{ marginBottom: '4rem', maxWidth: '700px', margin: '0 auto 4rem auto', gap: '1.5rem' }}>
+                    <div className="grid-2" style={{ marginBottom: '4rem', margin: '0 auto 4rem auto', gap: 'var(--space-md)' }}>
                         {contactItems.map((item, index) => {
                             const Icon = item.icon;
                             return (

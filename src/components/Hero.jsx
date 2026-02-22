@@ -130,6 +130,7 @@ export default function Hero() {
             </motion.div>
 
             <motion.div
+                className="container"
                 style={{
                     position: 'relative',
                     zIndex: 1,
@@ -138,8 +139,6 @@ export default function Hero() {
                     opacity,
                     x: parallaxX,
                     translateY: parallaxY,
-                    maxWidth: '1200px',
-                    padding: '0 2rem'
                 }}
             >
                 {/* Text Content */}
@@ -155,7 +154,6 @@ export default function Hero() {
                             ease: [0.22, 1, 0.36, 1]
                         }}
                         style={{
-                            fontSize: 'clamp(2.5rem, 10vw, 8rem)',
                             fontWeight: 900,
                             letterSpacing: '-0.03em',
                             lineHeight: 0.9,
@@ -213,10 +211,11 @@ export default function Hero() {
                     <motion.p
                         style={{
                             textTransform: 'uppercase',
-                            letterSpacing: '0.4em',
-                            fontSize: 'clamp(0.8rem, 2vw, 1.2rem)',
+                            letterSpacing: '0.2em',
+                            fontSize: 'clamp(0.5rem, 3vw, 1.1rem)',
                             fontWeight: 600,
                             color: '#aaa',
+                            width: '100%'
                         }}
                     >
                         {Array.from("FORGING DIGITAL EXCELLENCE").map((char, i) => (

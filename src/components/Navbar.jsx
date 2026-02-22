@@ -42,7 +42,7 @@ export default function Navbar() {
                 {/* Social Links */}
                 <li className="hidden-mobile" style={{ width: '1px', height: '20px', background: 'rgba(255,255,255,0.2)', margin: '0 0.5rem' }}></li>
 
-                <li style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                <li className="auto-layout-row">
                     <Magnetic>
                         <a href="https://github.com/nfsprogramming" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', transition: 'transform 0.2s', color: 'inherit', padding: '0.5rem' }} className="social-icon">
                             <Github size={20} />

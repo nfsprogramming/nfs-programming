@@ -91,10 +91,10 @@ export default function Services() {
                                         </motion.div>
 
                                         <div>
-                                            <h3 style={{ fontSize: '1.5rem', marginBottom: '0.8rem', fontWeight: 700 }}>
+                                            <h3>
                                                 {service.title}
                                             </h3>
-                                            <p style={{ fontSize: '0.95rem', lineHeight: 1.6, color: '#b3b3b3' }}>
+                                            <p>
                                                 {service.description}
                                             </p>
                                         </div>
