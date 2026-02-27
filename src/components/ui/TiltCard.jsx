@@ -13,7 +13,10 @@ export default function TiltCard({ children, className = "", style = {}, ...prop
     const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
     const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
 
+    const [isHovered, setIsHovered] = React.useState(false);
+
     const handleMouseMove = (e) => {
+        if (!isHovered) setIsHovered(true);
         const rect = e.currentTarget.getBoundingClientRect();
 
         const width = rect.width;
@@ -30,6 +33,7 @@ export default function TiltCard({ children, className = "", style = {}, ...prop
     };
 
     const handleMouseLeave = () => {
+        setIsHovered(false);
         x.set(0);
         y.set(0);
     };
@@ -40,14 +44,14 @@ export default function TiltCard({ children, className = "", style = {}, ...prop
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             whileHover={{
-                scale: 1.03,
-                boxShadow: '0 25px 80px rgba(0, 0, 0, 0.65)'
+                scale: 1.05,
+                boxShadow: '0 30px 100px rgba(0, 0, 0, 0.8)'
             }}
             transition={{
                 type: "spring",
-                stiffness: 220,
-                damping: 20,
-                mass: 0.8
+                stiffness: 300,
+                damping: 25,
+                mass: 1
             }}
             style={{
                 rotateX,
@@ -59,9 +63,40 @@ export default function TiltCard({ children, className = "", style = {}, ...prop
             className={className}
             {...props}
         >
-            <div style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d", height: "100%" }}>
+            <motion.div 
+                animate={{ 
+                    translateZ: isHovered ? "80px" : "30px",
+                    scale: isHovered ? 1.05 : 1
+                }}
+                transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20
+                }}
+                style={{ 
+                    transformStyle: "preserve-3d", 
+                    height: "100%",
+                    width: "100%"
+                }}
+            >
                 {children}
-            </div>
+            </motion.div>
+            {/* Glossy Reflection Effect */}
+            <motion.div
+                style={{
+                    position: 'absolute',
+                    top: '-50%',
+                    left: '-50%',
+                    width: '200%',
+                    height: '200%',
+                    zIndex: 0,
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, transparent 100%)',
+                    x: useTransform(mouseXSpring, [-0.5, 0.5], ['-10%', '10%']),
+                    y: useTransform(mouseYSpring, [-0.5, 0.5], ['-10%', '10%']),
+                    pointerEvents: 'none',
+                    borderRadius: 'inherit'
+                }}
+            />
             {/* Spotlight Effect */}
             <motion.div
                 style={{
@@ -73,9 +108,9 @@ export default function TiltCard({ children, className = "", style = {}, ...prop
                     zIndex: 0,
                     background: useTransform(
                         [x, y],
-                        ([latestX, latestY]) => `radial-gradient(circle at ${(latestX + 0.5) * 100}% ${(latestY + 0.5) * 100}%, rgba(255, 46, 46, 0.15), transparent 50%)`
+                        ([latestX, latestY]) => `radial-gradient(circle at ${(latestX + 0.5) * 100}% ${(latestY + 0.5) * 100}%, rgba(255, 46, 46, 0.2), transparent 50%)`
                     ),
-                    opacity: useTransform(x, (latest) => (latest === 0 ? 0 : 1)), // Hide when not hovering (simplified logic)
+                    opacity: useTransform(x, (latest) => (latest === 0 ? 0 : 1)),
                     pointerEvents: 'none',
                     borderRadius: 'inherit'
                 }}

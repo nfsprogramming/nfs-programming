@@ -17,16 +17,24 @@ export default function Scroll3DSection({ children, className = "" }) {
     const rotateX = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [15, 0, 0, -15]);
     const scale = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [0.85, 1, 1, 0.85]);
     const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.5, 1, 1, 0.5]);
-    const y = useTransform(scrollYProgress, [0, 1], [50, -50]); // Subtle parallax translation
+    const y = useTransform(scrollYProgress, [0, 1], [100, -100]); // More pronounced parallax translation
+    
+    // Premium additions: blur and brightness for depth
+    const blurValue = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [10, 0, 0, 10]);
+    const brightness = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [0.5, 1, 1, 0.5]);
+    const filter = useTransform(
+        [blurValue, brightness],
+        ([b, br]) => `blur(${b}px) brightness(${br})`
+    );
 
     return (
         <motion.div
             ref={ref}
             className={className}
             style={{
-                perspective: '1200px', // Creates the 3D space depth
+                perspective: '2000px', // Increased perspective for deeper look
                 transformStyle: 'preserve-3d',
-                willChange: 'transform' // Performance optimization
+                willChange: 'transform, filter' // Performance optimization
             }}
         >
             <motion.div
@@ -35,6 +43,7 @@ export default function Scroll3DSection({ children, className = "" }) {
                     scale,
                     opacity,
                     y,
+                    filter,
                     transformStyle: 'preserve-3d',
                     transformOrigin: 'center center'
                 }}

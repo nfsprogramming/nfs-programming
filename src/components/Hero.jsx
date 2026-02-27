@@ -20,6 +20,8 @@ export default function Hero() {
 
     const parallaxX = useTransform(smoothMouseX, [-50, 50], ["-2%", "2%"]);
     const parallaxY = useTransform(smoothMouseY, [-50, 50], ["-2%", "2%"]);
+    const rotateX = useTransform(smoothMouseY, [-50, 50], [5, -5]);
+    const rotateY = useTransform(smoothMouseX, [-50, 50], [-5, 5]);
 
     const techs = [
         { icon: Code, label: "React" },
@@ -136,10 +138,14 @@ export default function Hero() {
                     position: 'relative',
                     zIndex: 1,
                     textAlign: 'center',
+                    perspective: '2000px',
+                    transformStyle: 'preserve-3d',
                     y,
                     opacity,
                     x: parallaxX,
                     translateY: parallaxY,
+                    rotateX,
+                    rotateY,
                 }}
             >
                 {/* Text Content */}

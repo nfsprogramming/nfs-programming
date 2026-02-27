@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import Lenis from 'lenis';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
@@ -12,6 +13,7 @@ import Background3D from './components/Background3D';
 import Navbar from './components/Navbar';
 import CustomCursor from './components/CustomCursor';
 import Workflow from './components/Workflow';
+import PageTransition from './components/ui/PageTransition';
 import './grain.css';
 
 function ScrollToTop() {
@@ -20,6 +22,32 @@ function ScrollToTop() {
     window.scrollTo(0, 0);
   }, [pathname]);
   return null;
+}
+
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <>
+      <ScrollToTop />
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={
+            <PageTransition>
+              <Hero />
+              <Workflow />
+            </PageTransition>
+          } />
+          <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+          <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
+          <Route path="/experience" element={<PageTransition><Experience /></PageTransition>} />
+          <Route path="/skills" element={<PageTransition><Skills /></PageTransition>} />
+          <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
+          <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+        </Routes>
+      </AnimatePresence>
+    </>
+  );
 }
 
 export default function App() {
@@ -48,7 +76,6 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <ScrollToTop />
       <CustomCursor />
       <div className="app">
         {/* New Immersive 3D Background */}
@@ -59,20 +86,7 @@ export default function App() {
 
         <Navbar />
 
-        <Routes>
-          <Route path="/" element={
-            <>
-              <Hero />
-              <Workflow />
-            </>
-          } />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/experience" element={<Experience />} />
-          <Route path="/skills" element={<Skills />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <AnimatedRoutes />
 
         <footer className="footer" style={{ position: 'relative', zIndex: 10 }}>
           © {new Date().getFullYear()} NFS Programming. All Rights Reserved.
@@ -81,3 +95,4 @@ export default function App() {
     </BrowserRouter>
   );
 }
+
