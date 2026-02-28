@@ -43,10 +43,10 @@ export default function Workflow() {
                 </p>
             </div>
 
-            <div style={{ 
-                display: 'grid', 
-                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
-                gap: '2rem', 
+            <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+                gap: '2rem',
                 marginTop: '4rem',
                 maxWidth: '1200px',
                 margin: '4rem auto 0 auto'
@@ -54,7 +54,7 @@ export default function Workflow() {
                 {steps.map((step, index) => {
                     const Icon = step.icon;
                     return (
-                        <TiltCard 
+                        <TiltCard
                             key={index}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -62,13 +62,13 @@ export default function Workflow() {
                             transition={{ delay: index * 0.1, duration: 0.5 }}
                             style={{ height: '100%', padding: '2.5rem', textAlign: 'left' }}
                         >
-                            <div style={{ 
-                                width: '60px', 
-                                height: '60px', 
-                                borderRadius: '16px', 
-                                background: 'rgba(255, 46, 46, 0.1)', 
-                                display: 'flex', 
-                                alignItems: 'center', 
+                            <div style={{
+                                width: '60px',
+                                height: '60px',
+                                borderRadius: '16px',
+                                background: 'rgba(255, 46, 46, 0.1)',
+                                display: 'flex',
+                                alignItems: 'center',
                                 justifyContent: 'center',
                                 marginBottom: '2rem',
                                 border: '1px solid rgba(255, 46, 46, 0.2)'

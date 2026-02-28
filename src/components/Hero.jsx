@@ -3,6 +3,7 @@ import { useRef, useEffect } from 'react';
 import { ArrowRight, Code, Cpu, Globe, Rocket, Terminal, Layers, Github, Linkedin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Magnetic from './ui/Magnetic';
+import ScrambleText from './ui/ScrambleText';
 
 export default function Hero() {
     const ref = useRef(null);
@@ -225,31 +226,7 @@ export default function Hero() {
                             width: '100%'
                         }}
                     >
-                        {Array.from("FORGING DIGITAL EXCELLENCE").map((char, i) => (
-                            <motion.span
-                                key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{
-                                    delay: 1.8 + (i * 0.03), // Slower typing effect
-                                    duration: 0.4,
-                                    ease: "easeOut"
-                                }}
-                                whileHover={{
-                                    color: '#ff2e2e',
-                                    y: -5,
-                                    scale: 1.3,
-                                    transition: { duration: 0.2 }
-                                }}
-                                style={{
-                                    display: 'inline-block',
-                                    whiteSpace: 'pre',
-                                    cursor: 'default'
-                                }}
-                            >
-                                {char}
-                            </motion.span>
-                        ))}
+                        <ScrambleText text="FORGING DIGITAL EXCELLENCE" delay={1.8} />
                     </motion.p>
                 </motion.div>
 

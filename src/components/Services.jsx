@@ -75,7 +75,7 @@ export default function Services() {
                                     <div
                                         onMouseEnter={() => setHoveredIndex(index)}
                                         onMouseLeave={() => setHoveredIndex(null)}
-                                        style={{ height: '100%', width: '100%' }}
+                                        style={{ height: '100%', width: '100%', position: 'relative', zIndex: 1 }}
                                     >
                                         <motion.div
                                             initial={{ scale: 1, rotate: 0 }}

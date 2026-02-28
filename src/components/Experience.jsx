@@ -46,20 +46,33 @@ export default function Experience() {
 
                 <div style={{ position: 'relative', margin: '0 auto' }}>
                     {/* Center Line */}
-                    <motion.div
-                        style={{
-                            position: 'absolute',
-                            left: '0px',
-                            top: 0,
-                            bottom: 0,
-                            width: '2px',
-                            background: 'var(--glass-border)',
+                    
+                    <div 
+                        className="md-center-line" 
+                        style={{ 
+                            position: 'absolute', 
+                            left: '0px', 
+                            top: 0, 
+                            bottom: 0, 
+                            width: '2px', // Line width
                             transform: 'translateX(50%)',
-                            scaleY: scrollYProgress,
-                            originY: 0
                         }}
-                        className="md-center-line"
-                    />
+                    >
+                        <svg width="2" height="100%" style={{ position: 'absolute', top: 0, left: 0, overflow: 'visible' }}>
+                            <motion.line
+                                x1="1"
+                                y1="0"
+                                x2="1"
+                                y2="100%"
+                                stroke="var(--accent-color)"
+                                strokeWidth="2"
+                                strokeDasharray="10 10"
+                                style={{ pathLength: scrollYProgress }}
+                                strokeOpacity={0.6}
+                            />
+                        </svg>
+                        <div style={{ position: 'absolute', top: 0, left: 0, width: '2px', height: '100%', background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.05), transparent)', zIndex: -1 }}></div>
+                    </div>
 
                     <style>{`
                         @media (min-width: 768px) {

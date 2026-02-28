@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useReducedMotion, useScroll } from 'framer-motion';
 
-export default function TiltCard({ children, className = "", style = {}, ...props }) {
+export default function TiltCard({ children, className = "", spotlightColor = "rgba(255, 46, 46, 0.2)", style = {}, ...props }) {
     const ref = useRef(null);
     const shouldReduceMotion = useReducedMotion();
 
@@ -17,7 +17,7 @@ export default function TiltCard({ children, className = "", style = {}, ...prop
     // 3. As it leaves (progress 0.6-1): No blur (0px) -> Low blur (4px)
     const dynamicBlurValue = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [4, 0, 0, 4]);
     const dynamicOpacityValue = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [0.8, 1, 1, 0.8]);
-    
+
     // Performance: Smooth the blur value with a spring
     const blurSpring = useSpring(dynamicBlurValue, { stiffness: 100, damping: 30 });
     const opacitySpring = useSpring(dynamicOpacityValue, { stiffness: 100, damping: 30 });
@@ -94,8 +94,8 @@ export default function TiltCard({ children, className = "", style = {}, ...prop
             className={className}
             {...props}
         >
-            <motion.div 
-                animate={{ 
+            <motion.div
+                animate={{
                     translateZ: shouldReduceMotion ? 0 : (isHovered ? "60px" : "0px"),
                     scale: shouldReduceMotion ? 1 : (isHovered ? 1.05 : 1)
                 }}
@@ -104,8 +104,8 @@ export default function TiltCard({ children, className = "", style = {}, ...prop
                     stiffness: 300,
                     damping: 20
                 }}
-                style={{ 
-                    transformStyle: "preserve-3d", 
+                style={{
+                    transformStyle: "preserve-3d",
                     height: "100%",
                     width: "100%"
                 }}
@@ -141,7 +141,7 @@ export default function TiltCard({ children, className = "", style = {}, ...prop
                     zIndex: 0,
                     background: useTransform(
                         [x, y],
-                        ([latestX, latestY]) => `radial-gradient(circle at ${(latestX + 0.5) * 100}% ${(latestY + 0.5) * 100}%, rgba(255, 46, 46, 0.2), transparent 50%)`
+                        ([latestX, latestY]) => `radial-gradient(circle at ${(latestX + 0.5) * 100}% ${(latestY + 0.5) * 100}%, ${spotlightColor}, transparent 50%)`
                     ),
                     opacity: useTransform(x, (latest) => (latest === 0 ? 0 : 1)),
                     pointerEvents: 'none',
