@@ -54,11 +54,11 @@ export default function Services() {
                     </RevealOnScroll>
                 </div>
 
-                <div className="grid grid-3">
+                <div className="grid grid-3" style={{ alignItems: 'stretch' }}>
                     {services.map((service, index) => {
                         const Icon = service.icon;
                         return (
-                            <RevealOnScroll key={index} delay={index * 0.1}>
+                            <RevealOnScroll key={index} delay={index * 0.1} height="100%">
                                 <TiltCard
                                     className="glass-card"
                                     style={{
@@ -67,8 +67,9 @@ export default function Services() {
                                         alignItems: 'flex-start',
                                         justifyContent: 'flex-start',
                                         gap: '1.5rem',
+                                        padding: '3rem 2rem',
                                         cursor: 'default',
-                                        height: '100%'
+                                        height: '100%' // Ensure the card itself fills the parent
                                     }}
                                 >
                                     <div

@@ -349,7 +349,7 @@ export default function Hero() {
                         <Github size={24} />
                     </motion.a>
                     <motion.a
-                        href="https://linkedin.com/in/nfsprogramming"
+                        href="https://www.linkedin.com/in/nfs-photography"
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ y: -5, color: '#0077b5' }}

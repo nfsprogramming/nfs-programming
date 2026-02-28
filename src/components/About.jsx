@@ -50,18 +50,19 @@ export default function About() {
                     variants={containerVariants}
                     initial="hidden"
                     animate={isInView ? "visible" : "hidden"}
-                    style={{ alignItems: 'start' }}
+                    style={{ alignItems: 'stretch' }}
                 >
                     {/* Portrait Column */}
-                    <div className="auto-layout">
-                        <motion.div variants={itemVariants}>
-                            <TiltCard className="glass-card" style={{ padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                    <div className="auto-layout" style={{ height: '100%' }}>
+                        <motion.div variants={itemVariants} style={{ height: '100%' }}>
+                            <TiltCard className="glass-card" style={{ padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', height: '100%' }}>
                                 <motion.img
                                     src="/portrait.jpg"
                                     alt="Nifras"
                                     style={{
                                         width: '100%',
-                                        height: 'auto',
+                                        height: '100%',
+                                        objectFit: 'cover',
                                         borderRadius: '15px',
                                         filter: 'grayscale(0.3) contrast(1.1)',
                                         border: '1px solid rgba(255, 46, 46, 0.3)'
@@ -72,9 +73,9 @@ export default function About() {
                             </TiltCard>
                         </motion.div>
 
-                        <motion.div variants={itemVariants}>
-                            <TiltCard className="glass-card">
-                                <div className="flex items-center gap-4" style={{ marginBottom: '0.5rem' }}>
+                        <motion.div variants={itemVariants} style={{ height: '100%' }}>
+                            <TiltCard className="glass-card" style={{ height: '100%', padding: '2.5rem' }}>
+                                <div className="flex items-center gap-4" style={{ marginBottom: '1rem' }}>
                                     <Award className="text-accent" />
                                     <h3>Expertise</h3>
                                 </div>
@@ -88,29 +89,20 @@ export default function About() {
                     </div>
 
                     {/* Bio & Terminal Column */}
-                    <div className="auto-layout">
-                        <motion.div variants={itemVariants}>
-                            <TiltCard className="glass-card">
+                    <div className="auto-layout" style={{ height: '100%' }}>
+                        <motion.div variants={itemVariants} style={{ height: '100%' }}>
+                            <TiltCard className="glass-card" style={{ height: '100%', padding: '2.5rem' }}>
                                 <h3 className="text-accent" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                     <ShieldCheck size={24} /> Who Am I?
                                 </h3>
-                                <p style={{ marginTop: '1rem' }}>
+                                <p style={{ marginTop: '1.5rem' }}>
                                     I am a results-driven <strong>Full Stack Engineer</strong> dedicated to the craft of building intelligent,
                                     high-performance digital ecosystems. My approach focuses on systematic architecture and
                                     groundbreaking technology to deliver applications that are as powerful as they are intuitive.
                                 </p>
-                                <p style={{ marginTop: '1rem' }}>
-                                    Specializing in the deployment of large-scale <strong>AI models</strong>, scalable cloud infrastructures,
-                                    and high-fidelity user interfaces that set new standards for technical excellence.
-                                </p>
                             </TiltCard>
                         </motion.div>
-
-                        {/* Interactive Terminal - No Tilt for usability */}
-                        <motion.div variants={itemVariants}>
-                            <div style={{ marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#888', fontSize: '0.9rem' }}>
-                                <TerminalIcon size={16} /> Interactive Terminal
-                            </div>
+                        <motion.div variants={itemVariants} style={{ height: '100%' }}>
                             <Terminal />
                         </motion.div>
                     </div>

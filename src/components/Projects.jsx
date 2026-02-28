@@ -42,6 +42,30 @@ const projects = [
         description: "Creative JavaScript project exploring interactive storytelling and dynamic web experiences.",
         tags: ["JavaScript", "Interactive", "Creative"],
         github: "https://github.com/nfsprogramming/untoldablelines"
+    },
+    {
+        title: "Link to QR & Business Card",
+        description: "A web application that generates QR codes for URLs and creates digital business cards for easy contact sharing.",
+        tags: ["TypeScript", "QR Code", "Business Card"],
+        github: "https://github.com/nfsprogramming/link-to-qr-and-business-card"
+    },
+    {
+        title: "Custom Browser",
+        description: "A fast, lightweight custom web browser interface built with modern web technologies.",
+        tags: ["TypeScript", "Web Browser", "UI"],
+        github: "https://github.com/nfsprogramming/Browser"
+    },
+    {
+        title: "Moodtune",
+        description: "An interactive web application that curates and tunes music playlists based on the user's current mood.",
+        tags: ["JavaScript", "Music", "Interactive"],
+        github: "https://github.com/nfsprogramming/moodtune"
+    },
+    {
+        title: "Women Safety App (Offline)",
+        description: "An offline-first mobile application designed specifically to enhance women's safety with emergency alerts and tracking features.",
+        tags: ["Kotlin", "Android", "Safety"],
+        github: "https://github.com/nfsprogramming/Women-safety-app-offline"
     }
 ];
 
@@ -57,12 +81,11 @@ export default function Projects() {
                     </RevealOnScroll>
                 </div>
 
-                <div className="grid grid-3" style={{ position: 'relative', zIndex: 1 }}>
+                <div className="grid grid-3" style={{ position: 'relative', zIndex: 1, alignItems: 'stretch' }}>
                     {projects.map((project, index) => (
                         <Parallax3D
                             key={index}
                             offset={index % 3 === 1 ? 40 : index % 3 === 2 ? 80 : 0}
-                            className="h-full"
                         >
                             <motion.div
                                 initial={{ opacity: 0, y: 40, scale: 0.95 }}
@@ -78,12 +101,12 @@ export default function Projects() {
                                 <TiltCard
                                     className="glass-card"
                                     style={{
-                                        height: '100%',
                                         display: 'flex',
                                         flexDirection: 'column',
-                                        padding: '2rem',
+                                        padding: '3rem 2rem',
                                         position: 'relative',
                                         overflow: 'hidden',
+                                        height: '100%'
                                     }}
                                 >
                                     <motion.div

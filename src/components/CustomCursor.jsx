@@ -23,7 +23,12 @@ export default function CustomCursor() {
         };
 
         const handleMouseOver = (e) => {
-            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
+            const target = e.target;
+            if (target.tagName === 'A' || 
+                target.tagName === 'BUTTON' || 
+                target.closest('a') || 
+                target.closest('button') ||
+                window.getComputedStyle(target).cursor === 'pointer') {
                 setIsHovering(true);
             } else {
                 setIsHovering(false);
@@ -32,18 +37,24 @@ export default function CustomCursor() {
 
         const handleMouseDown = () => setIsClicked(true);
         const handleMouseUp = () => setIsClicked(false);
+        const handleMouseLeave = () => setIsVisible(false);
+        const handleMouseEnter = () => setIsVisible(true);
 
         // Add event listeners
         window.addEventListener('mousemove', moveCursor);
         window.addEventListener('mouseover', handleMouseOver);
         window.addEventListener('mousedown', handleMouseDown);
         window.addEventListener('mouseup', handleMouseUp);
+        document.addEventListener('mouseleave', handleMouseLeave);
+        document.addEventListener('mouseenter', handleMouseEnter);
 
         return () => {
             window.removeEventListener('mousemove', moveCursor);
             window.removeEventListener('mouseover', handleMouseOver);
             window.removeEventListener('mousedown', handleMouseDown);
             window.removeEventListener('mouseup', handleMouseUp);
+            document.removeEventListener('mouseleave', handleMouseLeave);
+            document.removeEventListener('mouseenter', handleMouseEnter);
         };
     }, [cursorX, cursorY, isVisible]);
 

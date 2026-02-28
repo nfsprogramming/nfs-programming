@@ -27,7 +27,7 @@ const steps = [
 
 export default function Workflow() {
     return (
-        <section className="container" style={{ padding: '6rem 2rem' }}>
+        <section className="container" style={{ padding: '6rem 2rem', position: 'relative', zIndex: 1 }}>
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -43,7 +43,22 @@ export default function Workflow() {
                 </p>
             </motion.div>
 
-            <div className="grid">
+            <div style={{ 
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, 1fr)', // Force exactly 2 columns on desktop
+                gap: '2.5rem',
+                marginTop: '4rem',
+                maxWidth: '900px',
+                margin: '4rem auto 0 auto',
+                alignItems: 'stretch'
+            }} className="workflow-grid">
+                <style>{`
+                    @media (max-width: 768px) {
+                        .workflow-grid {
+                            grid-template-columns: 1fr !important;
+                        }
+                    }
+                `}</style>
                 {steps.map((step, index) => {
                     const Icon = step.icon;
                     return (
@@ -60,50 +75,46 @@ export default function Workflow() {
                                 textAlign: 'center',
                                 position: 'relative',
                                 zIndex: 1,
-                                padding: '2rem 1rem', // Added vertical padding
-                                height: '100%',
-                                background: 'rgba(255,255,255,0.02)', // Subtle background for card feel
-                                borderRadius: '20px',
-                                border: '1px solid rgba(255,255,255,0.05)'
+                                padding: '3.5rem 2.5rem',
+                                height: '100%'
                             }}
                         >
-                            <div style={{
-                                width: '80px',
-                                height: '80px',
-                                borderRadius: '50%',
-                                background: 'rgba(255, 46, 46, 0.1)',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                marginBottom: '1.5rem',
-                                border: '1px solid rgba(255, 46, 46, 0.3)',
-                                boxShadow: '0 0 20px rgba(255, 46, 46, 0.2)'
-                            }}>
-                                <Icon size={32} className="text-accent" />
-                            </div>
+                                <div style={{
+                                    width: '80px',
+                                    height: '80px',
+                                    borderRadius: '50%',
+                                    background: 'rgba(255, 46, 46, 0.1)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    marginBottom: '1.5rem',
+                                    border: '1px solid rgba(255, 46, 46, 0.3)',
+                                    boxShadow: '0 0 20px rgba(255, 46, 46, 0.2)'
+                                }}>
+                                    <Icon size={32} className="text-accent" />
+                                </div>
 
-                            <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>{step.title}</h3>
-                            <p style={{ color: '#ccc', lineHeight: '1.6', fontSize: '0.95rem' }}>
-                                {step.description}
-                            </p>
+                                <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>{step.title}</h3>
+                                <p style={{ color: '#ccc', lineHeight: '1.6', fontSize: '0.95rem' }}>
+                                    {step.description}
+                                </p>
 
-                            <div style={{
-                                marginTop: '1rem',
-                                fontSize: '4rem',
-                                fontWeight: 900,
-                                color: 'rgba(255, 255, 255, 0.03)',
-                                position: 'absolute',
-                                top: '10px',
-                                right: '10%',
-                                zIndex: -1,
-                                pointerEvents: 'none'
-                            }}>
-                                0{index + 1}
-                            </div>
-                        </TiltCard>
-                    );
-                })}
-            </div>
-        </section>
-    );
-}
+                                <div style={{
+                                    fontSize: '4rem',
+                                    fontWeight: 900,
+                                    color: 'rgba(255, 255, 255, 0.03)',
+                                    position: 'absolute',
+                                    top: '10px',
+                                    right: '1.5rem',
+                                    zIndex: -1,
+                                    pointerEvents: 'none'
+                                }}>
+                                    0{index + 1}
+                                </div>
+                            </TiltCard>
+                        );
+                    })}
+                </div>
+            </section>
+        );
+    }

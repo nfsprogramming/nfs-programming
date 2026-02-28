@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useReducedMotion } from 'framer-motion';
 
 class Particle {
     constructor(width, height) {
@@ -12,10 +13,15 @@ class Particle {
         this.z = Math.random() * 2 + 0.5;
         this.baseColor = `rgba(255, 46, 46, ${0.2 * this.z})`;
         this.density = (Math.random() * 30) + 1;
+        this.vx = 0;
+        this.vy = 0;
     }
 
     update(mouse, scrollY) {
         const scrollSpeed = 0.5;
+        const friction = 0.95;
+        const ease = 0.05;
+
         let screenY = (this.y - (scrollY * this.z * scrollSpeed)) % this.height;
         if (screenY < 0) screenY += this.height;
 
@@ -25,30 +31,30 @@ class Particle {
         let forceDirectionX = dx / distance;
         let forceDirectionY = dy / distance;
         const maxDistance = 250;
-        const returnSpeed = 0.04;
 
         if (mouse.x != null && distance < maxDistance && !mouse.isHoveringText) {
             const force = (maxDistance - distance) / maxDistance;
             if (distance < 100) {
                 const repulsionForce = (100 - distance) / 100;
-                this.x -= forceDirectionX * repulsionForce * 2;
-                this.y -= forceDirectionY * repulsionForce * 2;
+                this.vx -= forceDirectionX * repulsionForce * 5;
+                this.vy -= forceDirectionY * repulsionForce * 5;
             } else {
-                const directionX = forceDirectionX * force * this.density;
-                const directionY = forceDirectionY * force * this.density;
-                this.x += directionX;
-                this.y += directionY;
-            }
-        } else {
-            if (this.x !== this.baseX) {
-                let dx = this.x - this.baseX;
-                this.x -= dx * returnSpeed;
-            }
-            if (this.y !== this.baseY) {
-                let dy = this.y - this.baseY;
-                this.y -= dy * returnSpeed;
+                const attractionForce = force * this.density * 0.5;
+                this.vx += forceDirectionX * attractionForce;
+                this.vy += forceDirectionY * attractionForce;
             }
         }
+
+        // Return to base position physics
+        let rdx = this.baseX - this.x;
+        let rdy = this.baseY - this.y;
+        this.vx += rdx * ease;
+        this.vy += rdy * ease;
+
+        this.vx *= friction;
+        this.vy *= friction;
+        this.x += this.vx;
+        this.y += this.vy;
     }
 
     draw(ctx, x, y) {
@@ -61,8 +67,11 @@ class Particle {
 
 export default function Background3D() {
     const canvasRef = useRef(null);
+    const shouldReduceMotion = useReducedMotion();
 
     useEffect(() => {
+        if (shouldReduceMotion) return; // Don't run animation if reduced motion is requested
+
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
         let width, height;
@@ -86,6 +95,8 @@ export default function Background3D() {
             canvas.height = height;
             initParticles();
         };
+
+        let animationFrameId;
 
         const animate = () => {
             ctx.clearRect(0, 0, width, height);
@@ -158,7 +169,7 @@ export default function Background3D() {
             // Mouse connections (lines) removed for cleaner look. 
             // The particles will still interact via physics (attraction/repulsion) defined in the update() method.
 
-            requestAnimationFrame(animate);
+            animationFrameId = requestAnimationFrame(animate);
         };
 
         window.addEventListener('resize', resize);
@@ -189,11 +200,12 @@ export default function Background3D() {
         animate();
 
         return () => {
+            cancelAnimationFrame(animationFrameId);
             window.removeEventListener('resize', resize);
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('mouseleave', handleMouseLeave);
         };
-    }, []);
+    }, [shouldReduceMotion]);
 
     return (
         <canvas

@@ -62,8 +62,10 @@ export default function Testimonials() {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        backdropFilter: 'blur(20px)',
-                        border: '1px solid rgba(255, 255, 255, 0.05)'
+                        background: 'var(--glass-bg)',
+                        backdropFilter: 'blur(var(--glass-blur))',
+                        border: '1px solid var(--glass-border)',
+                        borderRadius: '24px'
                     }}
                 >
                     <p style={{

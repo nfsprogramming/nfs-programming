@@ -14,7 +14,7 @@ export default function Contact() {
         { icon: Mail, text: 'nifrasempire25@gmail.com', href: 'mailto:nifrasempire25@gmail.com' },
         { icon: Phone, text: '8925147213', href: 'tel:8925147213' },
         { icon: Github, text: 'nfsprogramming', href: 'https://github.com/nfsprogramming' },
-        { icon: Linkedin, text: 'LinkedIn Profile', href: 'https://www.linkedin.com/' }
+        { icon: Linkedin, text: 'LinkedIn Profile', href: 'https://www.linkedin.com/in/nfs-photography' }
     ];
 
     return (
@@ -27,7 +27,7 @@ export default function Contact() {
                         </h2>
                     </RevealOnScroll>
 
-                    <div className="grid-2" style={{ marginBottom: '4rem', margin: '0 auto 4rem auto', gap: 'var(--space-md)' }}>
+                    <div className="grid-2" style={{ marginBottom: '4rem', margin: '0 auto 4rem auto', gap: 'var(--space-md)', alignItems: 'stretch' }}>
                         {contactItems.map((item, index) => {
                             const Icon = item.icon;
                             return (
@@ -41,7 +41,7 @@ export default function Contact() {
                                 >
                                     <TiltCard
                                         className="glass-card"
-                                        style={{ padding: '1.5rem 2rem', height: '100%' }}
+                                        style={{ padding: '2rem', height: '100%' }}
                                     >
                                         <div style={{
                                             display: 'flex',

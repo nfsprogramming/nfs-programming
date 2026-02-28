@@ -1,8 +1,9 @@
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 
 export default function Scroll3DSection({ children, className = "" }) {
     const ref = useRef(null);
+    const shouldReduceMotion = useReducedMotion();
     
     // Track the scroll progress of this container relative to the viewport
     const { scrollYProgress } = useScroll({
@@ -22,9 +23,12 @@ export default function Scroll3DSection({ children, className = "" }) {
     // Premium additions: blur and brightness for depth
     const blurValue = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [10, 0, 0, 10]);
     const brightness = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [0.5, 1, 1, 0.5]);
+    
+    // Performance: Only apply blur if not on mobile and not reduced motion
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     const filter = useTransform(
         [blurValue, brightness],
-        ([b, br]) => `blur(${b}px) brightness(${br})`
+        ([b, br]) => (isMobile || shouldReduceMotion) ? `brightness(${br})` : `blur(${b}px) brightness(${br})`
     );
 
     return (
@@ -32,18 +36,18 @@ export default function Scroll3DSection({ children, className = "" }) {
             ref={ref}
             className={className}
             style={{
-                perspective: '2000px', // Increased perspective for deeper look
+                perspective: shouldReduceMotion ? 'none' : '2000px', // Disable perspective for reduced motion
                 transformStyle: 'preserve-3d',
                 willChange: 'transform, filter' // Performance optimization
             }}
         >
             <motion.div
                 style={{
-                    rotateX,
-                    scale,
-                    opacity,
-                    y,
-                    filter,
+                    rotateX: shouldReduceMotion ? 0 : rotateX,
+                    scale: shouldReduceMotion ? 1 : scale,
+                    opacity: shouldReduceMotion ? 1 : opacity,
+                    y: shouldReduceMotion ? 0 : y,
+                    filter: shouldReduceMotion ? 'none' : filter,
                     transformStyle: 'preserve-3d',
                     transformOrigin: 'center center'
                 }}

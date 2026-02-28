@@ -5,9 +5,10 @@
   --text-color: #ffffff;
   --accent-color: #ff2e2e;
   --text-secondary: #9ca3af;
-  --glass-bg: rgba(20, 20, 20, 0.4);
-  /* Darker, more premium glass */
-  --glass-border: rgba(255, 255, 255, 0.05);
+  /* Darker, more premium glass with better contrast */
+  --glass-bg: rgba(10, 10, 10, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-blur: 8px;
 
   /* Fluid Spacing Scale */
   --space-xs: clamp(0.25rem, 0.2rem + 0.25vw, 0.5rem);

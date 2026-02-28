@@ -49,7 +49,7 @@ export default function Navbar() {
                         </a>
                     </Magnetic>
                     <Magnetic>
-                        <a href="https://linkedin.com/in/nfsprogramming" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', transition: 'transform 0.2s', color: 'inherit', padding: '0.5rem' }} className="social-icon">
+                        <a href="https://www.linkedin.com/in/nfs-photography" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', transition: 'transform 0.2s', color: 'inherit', padding: '0.5rem' }} className="social-icon">
                             <Linkedin size={20} />
                         </a>
                     </Magnetic>

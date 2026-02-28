@@ -14,8 +14,21 @@ export default function Parallax3D({ children, offset = 50, className = "" }) {
     const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.9]);
 
     return (
-        <div ref={ref} className={className} style={{ perspective: '1200px', transformStyle: 'preserve-3d' }}>
-            <motion.div style={{ y, rotateX, opacity, scale, transformStyle: 'preserve-3d' }}>
+        <div ref={ref} className={className} style={{ 
+            perspective: '1200px', 
+            transformStyle: 'preserve-3d',
+            height: '100%',
+            width: '100%'
+        }}>
+            <motion.div style={{ 
+                y, 
+                rotateX, 
+                opacity, 
+                scale, 
+                transformStyle: 'preserve-3d',
+                height: '100%',
+                width: '100%'
+            }}>
                 {children}
             </motion.div>
         </div>
