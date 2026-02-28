@@ -53,7 +53,7 @@ export default function Experience() {
                             top: 0,
                             bottom: 0,
                             width: '2px',
-                            background: 'rgba(255, 255, 255, 0.1)',
+                            background: 'var(--glass-border)',
                             transform: 'translateX(50%)',
                             scaleY: scrollYProgress,
                             originY: 0
@@ -76,45 +76,34 @@ export default function Experience() {
                             style={{
                                 marginBottom: '4rem',
                                 position: 'relative',
-                                paddingLeft: '2rem' // Mobile default
+                                paddingLeft: '2rem',
+                                width: '100%',
+                                display: 'flex',
+                                justifyContent: index % 2 === 0 ? 'flex-start' : 'flex-end'
                             }}
                         >
-                            <motion.div
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.5, delay: index * 0.2 }}
-                                viewport={{ once: true }}
-                                style={{
-                                    borderLeft: '2px solid rgba(255, 46, 46, 0.3)',
-                                    paddingLeft: '2rem',
-                                    position: 'relative'
-                                }}
-                            >
-                                {/* Node */}
-                                <div style={{
-                                    position: 'absolute',
-                                    left: '-9px',
-                                    top: '0',
-                                    width: '16px',
-                                    height: '16px',
-                                    borderRadius: '50%',
-                                    background: 'var(--accent-color)',
-                                    boxShadow: '0 0 10px rgba(255, 46, 46, 0.6)'
-                                }} />
+                            <div style={{ width: '100%', maxWidth: '500px' }}>
+                                <RevealOnScroll delay={index * 0.1}>
+                                    <TiltCard className="glass-card" style={{ padding: '2.5rem' }}>
+                                        <div className="flex items-center gap-4" style={{ marginBottom: '1rem' }}>
+                                            <Briefcase className="text-accent" size={24} />
+                                            <div>
+                                                <h3 style={{ margin: 0 }}>{exp.role}</h3>
+                                                <p style={{ color: 'var(--accent-color)', fontWeight: 600, margin: 0 }}>{exp.company}</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="flex items-center gap-2" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
+                                            <Calendar size={16} />
+                                            <span>{exp.period}</span>
+                                        </div>
 
-                                <TiltCard className="glass-card" style={{ padding: '2rem' }}>
-                                    <div className="flex gap-2" style={{ marginBottom: '0.5rem', opacity: 0.7, fontSize: '0.9rem' }}>
-                                        <Calendar size={14} /> {exp.period}
-                                    </div>
-                                    <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'white' }}>{exp.role}</h3>
-                                    <div className="flex gap-2" style={{ marginBottom: '1.5rem', color: 'var(--accent-color)', alignItems: 'center' }}>
-                                        <Briefcase size={16} /> {exp.company}
-                                    </div>
-                                    <p style={{ lineHeight: 1.6, color: '#ccc' }}>
-                                        {exp.description}
-                                    </p>
-                                </TiltCard>
-                            </motion.div>
+                                        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>
+                                            {exp.description}
+                                        </p>
+                                    </TiltCard>
+                                </RevealOnScroll>
+                            </div>
                         </div>
                     ))}
                 </div>

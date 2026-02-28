@@ -15,9 +15,11 @@ export default function Navbar() {
                 NFS <span>Programming</span>
             </Link>
 
-            <button className="mobile-menu-btn" onClick={() => setIsNavOpen(!isNavOpen)} aria-label="Toggle Menu">
-                {isNavOpen ? <X size={28} color="#fff" /> : <Menu size={28} color="#fff" />}
-            </button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <button className="mobile-menu-btn" onClick={() => setIsNavOpen(!isNavOpen)} aria-label="Toggle Menu">
+                    {isNavOpen ? <X size={28} style={{ color: 'var(--text-color)' }} /> : <Menu size={28} style={{ color: 'var(--text-color)' }} />}
+                </button>
+            </div>
 
             <ul className={`nav-links ${isNavOpen ? 'mobile-open' : 'hidden-mobile'}`}>
                 {navItems.map((item) => (

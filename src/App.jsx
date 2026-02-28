@@ -15,6 +15,7 @@ import CustomCursor from './components/CustomCursor';
 import Workflow from './components/Workflow';
 import PageTransition from './components/ui/PageTransition';
 import Preloader from './components/ui/Preloader';
+import QuickActions from './components/ui/QuickActions';
 import './grain.css';
 
 function ScrollToTop() {
@@ -91,6 +92,7 @@ export default function App() {
             transition={{ duration: 0.5 }}
           >
             <CustomCursor />
+            <QuickActions />
             {/* Global Scroll Progress Bar */}
             <motion.div
               className="scroll-progress-bar"

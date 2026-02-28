@@ -5,11 +5,39 @@
   --text-color: #ffffff;
   --accent-color: #ff2e2e;
   --text-secondary: #9ca3af;
-  /* Darker, more premium glass with better contrast */
   --glass-bg: rgba(10, 10, 10, 0.75);
   --glass-border: rgba(255, 255, 255, 0.12);
   --glass-blur: 8px;
+  --nav-bg: rgba(5, 5, 5, 0.8);
+  --particle-color: 255, 46, 46;
+  --card-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+}
 
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.navbar .theme-toggle {
+  color: var(--text-color) !important;
+}
+
+.navbar span {
+  color: var(--text-color);
+}
+
+.text-accent {
+  color: var(--accent-color);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  color: var(--text-color);
+}
+
+:root {
   /* Fluid Spacing Scale */
   --space-xs: clamp(0.25rem, 0.2rem + 0.25vw, 0.5rem);
   --space-sm: clamp(0.5rem, 0.4rem + 0.5vw, 1rem);
@@ -233,7 +261,7 @@ p {
 .glass-card:hover {
   border-color: rgba(255, 46, 46, 0.3);
   transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--card-shadow);
 }
 
 /* Fluid Layout Utilities */
@@ -300,15 +328,16 @@ p {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 100;
-  padding: 1.5rem 3rem;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(15px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  height: var(--navbar-height);
+  background: var(--nav-bg);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--glass-border);
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: padding 0.3s ease;
+  padding: 0 var(--space-lg);
+  transition: padding 0.3s ease, background 0.3s ease;
 }
 
 .brand-logo {

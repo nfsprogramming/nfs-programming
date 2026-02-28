@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useReducedMotion } from 'framer-motion';
 
 class Particle {
-    constructor(width, height) {
+    constructor(width, height, color) {
         this.width = width;
         this.height = height;
         this.baseX = Math.random() * width;
@@ -11,13 +11,14 @@ class Particle {
         this.y = this.baseY;
         this.size = Math.random() * 2 + 1;
         this.z = Math.random() * 2 + 0.5;
-        this.baseColor = `rgba(255, 46, 46, ${0.2 * this.z})`;
+        this.color = color;
         this.density = (Math.random() * 30) + 1;
         this.vx = 0;
         this.vy = 0;
     }
 
-    update(mouse, scrollY) {
+    update(mouse, scrollY, color) {
+        this.color = color;
         const scrollSpeed = 0.5;
         const friction = 0.95;
         const ease = 0.05;
@@ -58,7 +59,7 @@ class Particle {
     }
 
     draw(ctx, x, y) {
-        ctx.fillStyle = this.baseColor;
+        ctx.fillStyle = `rgba(${this.color}, ${0.2 * this.z})`;
         ctx.beginPath();
         ctx.arc(x, y, this.size * this.z * 0.6, 0, Math.PI * 2);
         ctx.fill();
@@ -70,21 +71,25 @@ export default function Background3D() {
     const shouldReduceMotion = useReducedMotion();
 
     useEffect(() => {
-        if (shouldReduceMotion) return; // Don't run animation if reduced motion is requested
+        if (shouldReduceMotion) return;
 
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
         let width, height;
         let particles = [];
         let mouse = { x: null, y: null, isHoveringText: false };
-        const connectionDistance = 150;
-        const mouseDistance = 180;
+        let particleColor = '255, 46, 46';
+
+        const getParticleColor = () => {
+            return '255, 46, 46';
+        };
 
         const initParticles = () => {
             particles = [];
+            particleColor = getParticleColor();
             const count = width < 768 ? 50 : 100;
             for (let i = 0; i < count; i++) {
-                particles.push(new Particle(width, height));
+                particles.push(new Particle(width, height, particleColor));
             }
         };
 
@@ -97,41 +102,32 @@ export default function Background3D() {
         };
 
         let animationFrameId;
-
         const animate = () => {
             ctx.clearRect(0, 0, width, height);
+            const scrollY = window.scrollY;
+            const connectionDistance = 150;
 
             // Subtle Mouse Glow Background
             if (mouse.x != null) {
                 const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 400);
-                gradient.addColorStop(0, 'rgba(255, 46, 46, 0.03)');
+                gradient.addColorStop(0, `rgba(${particleColor}, 0.03)`);
                 gradient.addColorStop(1, 'transparent');
                 ctx.fillStyle = gradient;
                 ctx.fillRect(0, 0, width, height);
             }
 
-            let mouseConnections = [];
-            const scrollY = window.scrollY;
-            const scrollSpeed = 0.5;
-
-            // Update and draw particles first
-            particles.forEach(particle => {
-                particle.update(mouse, scrollY);
-
-                // Calculate render position
-                let visibleY = (particle.y - (scrollY * particle.z * scrollSpeed)) % height;
-                if (visibleY < 0) visibleY += height;
-
-                particle.renderX = particle.x;
-                particle.renderY = visibleY;
-
-                particle.draw(ctx, particle.renderX, particle.renderY);
+            particles.forEach(p => {
+                p.update(mouse, scrollY, particleColor);
+                let screenY = (p.y - (scrollY * p.z * 0.5)) % height;
+                if (screenY < 0) screenY += height;
+                p.renderX = p.x;
+                p.renderY = screenY;
+                p.draw(ctx, p.renderX, p.renderY);
             });
 
-            // Draw connections between particles
+            // Draw connections
             ctx.lineWidth = 0.5;
             for (let i = 0; i < particles.length; i++) {
-                // Connection between particles
                 for (let j = i; j < particles.length; j++) {
                     let dx = particles[i].renderX - particles[j].renderX;
                     let dy = particles[i].renderY - particles[j].renderY;
@@ -141,33 +137,13 @@ export default function Background3D() {
                         ctx.beginPath();
                         let opacity = 1 - (distance / connectionDistance);
                         let depthFactor = (particles[i].z + particles[j].z) / 4;
-
-                        // More vibrant connection color
-                        ctx.strokeStyle = `rgba(255, 46, 46, ${opacity * depthFactor * 0.25})`;
+                        ctx.strokeStyle = `rgba(${particleColor}, ${opacity * depthFactor * 0.2})`;
                         ctx.moveTo(particles[i].renderX, particles[i].renderY);
                         ctx.lineTo(particles[j].renderX, particles[j].renderY);
                         ctx.stroke();
                     }
                 }
-
-                // Mouse Connections (The "Capturing" Visual) - Collect first
-                if (mouse.x != null && !mouse.isHoveringText) {
-                    let dx = mouse.x - particles[i].renderX;
-                    let dy = mouse.y - particles[i].renderY;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < mouseDistance) {
-                        mouseConnections.push({
-                            x: particles[i].renderX,
-                            y: particles[i].renderY,
-                            distance: distance
-                        });
-                    }
-                }
             }
-
-            // Mouse connections (lines) removed for cleaner look. 
-            // The particles will still interact via physics (attraction/repulsion) defined in the update() method.
 
             animationFrameId = requestAnimationFrame(animate);
         };

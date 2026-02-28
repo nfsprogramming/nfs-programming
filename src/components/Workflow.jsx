@@ -28,93 +28,59 @@ const steps = [
 export default function Workflow() {
     return (
         <section className="container" style={{ padding: '6rem 2rem', position: 'relative', zIndex: 1 }}>
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                style={{ textAlign: 'center', marginBottom: '5rem' }}
-            >
-                <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>
-                    My <span className="text-accent">Workflow</span>
-                </h2>
-                <p style={{ color: '#aaa', maxWidth: '600px', margin: '0 auto' }}>
-                    From concept to code, I follow a streamlined process to ensure pixel-perfect results and timely delivery.
+            <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    style={{ fontSize: '2.5rem' }}
+                >
+                    My <span className="text-accent">Process</span>
+                </motion.h2>
+                <p style={{ color: '#aaa', marginTop: '1rem' }}>
+                    How I bring digital ideas to life.
                 </p>
-            </motion.div>
+            </div>
 
             <div style={{ 
-                display: 'grid',
-                gridTemplateColumns: 'repeat(2, 1fr)', // Force exactly 2 columns on desktop
-                gap: '2.5rem',
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+                gap: '2rem', 
                 marginTop: '4rem',
-                maxWidth: '900px',
-                margin: '4rem auto 0 auto',
-                alignItems: 'stretch'
-            }} className="workflow-grid">
-                <style>{`
-                    @media (max-width: 768px) {
-                        .workflow-grid {
-                            grid-template-columns: 1fr !important;
-                        }
-                    }
-                `}</style>
+                maxWidth: '1200px',
+                margin: '4rem auto 0 auto'
+            }}>
                 {steps.map((step, index) => {
                     const Icon = step.icon;
                     return (
-                        <TiltCard
+                        <TiltCard 
                             key={index}
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: index * 0.2, duration: 0.5 }}
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                textAlign: 'center',
-                                position: 'relative',
-                                zIndex: 1,
-                                padding: '3.5rem 2.5rem',
-                                height: '100%'
-                            }}
+                            transition={{ delay: index * 0.1, duration: 0.5 }}
+                            style={{ height: '100%', padding: '2.5rem', textAlign: 'left' }}
                         >
-                                <div style={{
-                                    width: '80px',
-                                    height: '80px',
-                                    borderRadius: '50%',
-                                    background: 'rgba(255, 46, 46, 0.1)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    marginBottom: '1.5rem',
-                                    border: '1px solid rgba(255, 46, 46, 0.3)',
-                                    boxShadow: '0 0 20px rgba(255, 46, 46, 0.2)'
-                                }}>
-                                    <Icon size={32} className="text-accent" />
-                                </div>
-
-                                <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>{step.title}</h3>
-                                <p style={{ color: '#ccc', lineHeight: '1.6', fontSize: '0.95rem' }}>
-                                    {step.description}
-                                </p>
-
-                                <div style={{
-                                    fontSize: '4rem',
-                                    fontWeight: 900,
-                                    color: 'rgba(255, 255, 255, 0.03)',
-                                    position: 'absolute',
-                                    top: '10px',
-                                    right: '1.5rem',
-                                    zIndex: -1,
-                                    pointerEvents: 'none'
-                                }}>
-                                    0{index + 1}
-                                </div>
-                            </TiltCard>
-                        );
-                    })}
-                </div>
-            </section>
-        );
-    }
+                            <div style={{ 
+                                width: '60px', 
+                                height: '60px', 
+                                borderRadius: '16px', 
+                                background: 'rgba(255, 46, 46, 0.1)', 
+                                display: 'flex', 
+                                alignItems: 'center', 
+                                justifyContent: 'center',
+                                marginBottom: '2rem',
+                                border: '1px solid rgba(255, 46, 46, 0.2)'
+                            }}>
+                                <Icon className="text-accent" size={30} />
+                            </div>
+                            <h3 style={{ fontSize: '1.4rem', marginBottom: '1rem' }}>{step.title}</h3>
+                            <p style={{ color: '#ccc', lineHeight: 1.6 }}>{step.description}</p>
+                        </TiltCard>
+                    );
+                })}
+            </div>
+        </section>
+    );
+}

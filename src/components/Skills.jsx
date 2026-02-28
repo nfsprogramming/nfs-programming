@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Parallax3D from './ui/Parallax3D';
+import SkillSphere from './ui/SkillSphere';
 
 const skills = [
     { name: 'JavaScript', level: 90 },
@@ -16,109 +17,99 @@ export default function Skills() {
     const isInView = useInView(ref, { once: true, margin: "-100px" });
 
     return (
-        <section id="skills" ref={ref} className="section-padding" style={{ background: 'rgba(0,0,0,0.3)' }}>
+        <section id="skills" ref={ref} className="section-padding" style={{ background: 'rgba(0,0,0,0.3)', overflow: 'hidden' }}>
             <div className="container">
-                <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.6 }}
-                >
-                    My <span className="text-accent">Skills</span>
-                </motion.h2>
+                <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.6 }}
+                    >
+                        Technical <span className="text-accent">Ecosystem</span>
+                    </motion.h2>
+                    <p style={{ color: 'var(--text-secondary)', marginTop: '1rem' }}>
+                        Interact with the 3D sphere to explore my core technologies.
+                    </p>
+                </div>
 
-                <div className="grid grid-2">
-                    {skills.map((skill, index) => (
-                        <Parallax3D
-                            key={index}
-                            offset={index % 2 === 0 ? 30 : 60} // Staggered parallax
-                            className="w-full"
-                        >
-                            <motion.div
-                                initial={{ opacity: 0, x: -50 }}
-                                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                                whileHover={{ scale: 1.05, x: 10, transition: { duration: 0.2 } }}
-                                transition={{
-                                    delay: index * 0.1,
-                                    duration: 0.6,
-                                    ease: [0.22, 1, 0.36, 1]
-                                }}
-                                style={{ transformStyle: 'preserve-3d' }}
-                            >
-                                <div className="flex justify-between" style={{ marginBottom: '0.5rem', alignItems: 'center' }}>
-                                    <motion.span
-                                        style={{ fontWeight: 600, fontSize: '1.1rem' }}
-                                        initial={{ opacity: 0 }}
-                                        animate={isInView ? { opacity: 1 } : {}}
-                                        transition={{ delay: index * 0.1 + 0.2 }}
-                                    >
+                <div style={{ 
+                    display: 'grid', 
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))', 
+                    alignItems: 'center', 
+                    gap: '4rem', 
+                    position: 'relative' 
+                }}>
+                    {/* Skill Bars Column */}
+                    <div style={{ 
+                        display: 'flex', 
+                        flexDirection: 'column', 
+                        gap: '2.5rem'
+                    }}>
+                        {skills.map((skill, index) => (
+                            <div key={index} style={{ width: '100%' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', alignItems: 'center' }}>
+                                    <span style={{ 
+                                        fontWeight: 700, 
+                                        fontSize: '1.2rem', 
+                                        color: 'var(--text-color)',
+                                        letterSpacing: '0.5px'
+                                    }}>
                                         {skill.name}
-                                    </motion.span>
-                                    <motion.span
-                                        className="text-accent"
-                                        initial={{ opacity: 0, scale: 0 }}
-                                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                                        transition={{
-                                            delay: index * 0.1 + 0.3,
-                                            type: "spring",
-                                            stiffness: 200
-                                        }}
-                                        style={{ fontWeight: 700 }}
-                                    >
+                                    </span>
+                                    <span className="text-accent" style={{ fontWeight: 800, fontSize: '1.1rem' }}>
                                         {skill.level}%
-                                    </motion.span>
+                                    </span>
                                 </div>
-
-                                {/* Skill Bar Container */}
                                 <div style={{
                                     height: '10px',
-                                    background: 'rgba(255, 255, 255, 0.05)',
-                                    borderRadius: '10px',
+                                    background: 'rgba(255, 255, 255, 0.03)',
+                                    borderRadius: '20px',
                                     overflow: 'hidden',
-                                    position: 'relative',
-                                    border: '1px solid rgba(255, 255, 255, 0.05)',
-                                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                                    position: 'relative'
                                 }}>
-                                    {/* Animated Fill */}
                                     <motion.div
                                         initial={{ width: 0 }}
                                         animate={isInView ? { width: `${skill.level}%` } : {}}
-                                        transition={{
-                                            delay: index * 0.1 + 0.4,
-                                            duration: 1.2,
-                                            ease: [0.22, 1, 0.36, 1]
-                                        }}
+                                        transition={{ delay: index * 0.1, duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
                                         style={{
                                             height: '100%',
                                             background: 'linear-gradient(90deg, #ff2e2e, #ff6b6b)',
-                                            boxShadow: '0 0 20px rgba(255, 46, 46, 0.5)',
-                                            position: 'relative'
+                                            boxShadow: '0 0 20px rgba(255, 46, 46, 0.4)',
+                                            borderRadius: '20px'
                                         }}
                                     >
-                                        {/* Shine Effect */}
                                         <motion.div
-                                            animate={{
-                                                x: ['-100%', '200%']
-                                            }}
-                                            transition={{
-                                                duration: 2,
-                                                repeat: Infinity,
-                                                repeatDelay: 1,
-                                                ease: "easeInOut"
-                                            }}
+                                            animate={{ x: ['-100%', '200%'] }}
+                                            transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
                                             style={{
                                                 position: 'absolute',
                                                 top: 0,
                                                 left: 0,
+                                                width: '100px',
                                                 height: '100%',
-                                                width: '50%',
-                                                background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)'
+                                                background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)'
                                             }}
                                         />
                                     </motion.div>
                                 </div>
-                            </motion.div>
-                        </Parallax3D>
-                    ))}
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* 3D Sphere Column */}
+                    <motion.div 
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                        transition={{ duration: 1, ease: "easeOut" }}
+                        style={{ 
+                            height: 'min(500px, 70vh)', 
+                            width: '100%', 
+                            position: 'relative'
+                        }}
+                    >
+                        <SkillSphere />
+                    </motion.div>
                 </div>
             </div>
         </section>

@@ -59,6 +59,8 @@ export default function About() {
                                 <motion.img
                                     src="/portrait.jpg"
                                     alt="Nifras"
+                                    loading="lazy"
+                                    decoding="async"
                                     style={{
                                         width: '100%',
                                         height: '100%',
