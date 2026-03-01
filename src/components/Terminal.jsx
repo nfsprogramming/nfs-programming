@@ -53,6 +53,10 @@ export default function Terminal() {
 
             if (cmd === 'clear') {
                 setHistory([]);
+            } else if (cmd === 'sudo nfs-engine' || cmd === 'devmode') {
+                window.dispatchEvent(new CustomEvent('toggle-dev-mode'));
+                newHistory.push({ type: 'info', content: 'INITIALIZING PORTFOLIO ENGINE v2.0... Bypassing security protocols...' });
+                setHistory(newHistory);
             } else if (commands[cmd]) {
                 newHistory.push({ type: 'output', content: commands[cmd] });
                 setHistory(newHistory);
@@ -82,10 +86,10 @@ export default function Terminal() {
                 overflow: 'hidden',
                 fontFamily: '"Fira Code", monospace',
                 boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
-                marginTop: 'var(--space-md)',
                 width: '100%',
-                maxWidth: '800px',
-                margin: '0 auto'
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column'
             }}
         >
             {/* Terminal Header */}
@@ -112,8 +116,7 @@ export default function Terminal() {
                 className="terminal-body"
                 style={{
                     padding: 'var(--space-md)',
-                    minHeight: '300px',
-                    maxHeight: '400px',
+                    flex: 1,
                     overflowY: 'auto',
                     color: '#e0e0e0',
                     fontSize: 'clamp(0.8rem, 2vw, 0.95rem)'

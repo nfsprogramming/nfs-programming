@@ -46,68 +46,67 @@ export default function About() {
                 </div>
 
                 <motion.div
-                    className="grid-2"
+                    className="about-grid"
                     variants={containerVariants}
                     initial="hidden"
                     animate={isInView ? "visible" : "hidden"}
                     style={{ alignItems: 'stretch' }}
                 >
-                    {/* Portrait Column */}
-                    <div className="auto-layout" style={{ height: '100%' }}>
-                        <motion.div variants={itemVariants} style={{ height: '100%' }}>
-                            <TiltCard className="glass-card" style={{ padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', height: '100%' }}>
-                                <motion.img
-                                    src="/portrait.jpg"
-                                    alt="Nifras"
-                                    loading="lazy"
-                                    decoding="async"
-                                    style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        objectFit: 'cover',
-                                        borderRadius: '15px',
-                                        filter: 'grayscale(0.3) contrast(1.1)',
-                                        border: '1px solid rgba(255, 46, 46, 0.3)'
-                                    }}
-                                    whileHover={{ filter: 'grayscale(0)', scale: 1.02 }}
-                                    transition={{ duration: 0.5 }}
-                                />
-                            </TiltCard>
-                        </motion.div>
+                    {/* Item 1: Portrait */}
+                    <motion.div variants={itemVariants} style={{ height: '100%' }}>
+                        <TiltCard className="glass-card" style={{ padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', height: '100%' }}>
+                            <motion.img
+                                src="/portrait.jpg"
+                                alt="Nifras"
+                                loading="lazy"
+                                decoding="async"
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'cover',
+                                    borderRadius: '15px',
+                                    filter: 'grayscale(0.3) contrast(1.1)',
+                                    border: '1px solid rgba(255, 46, 46, 0.3)'
+                                }}
+                                whileHover={{ filter: 'grayscale(0)', scale: 1.02 }}
+                                transition={{ duration: 0.5 }}
+                            />
+                        </TiltCard>
+                    </motion.div>
 
-                        <motion.div variants={itemVariants} style={{ height: '100%' }}>
-                            <TiltCard className="glass-card" style={{ height: '100%', padding: '2.5rem' }}>
-                                <div className="flex items-center gap-4" style={{ marginBottom: '1rem' }}>
-                                    <Award className="text-accent" />
-                                    <h3>Expertise</h3>
-                                </div>
-                                <ul style={{ listStyle: 'none', padding: 0, color: 'var(--text-secondary)' }}>
-                                    <li>Advanced Software Engineering</li>
-                                    <li>AI & Machine Learning Systems</li>
-                                    <li>Cloud-Native Architectures</li>
-                                </ul>
-                            </TiltCard>
-                        </motion.div>
-                    </div>
+                    {/* Item 2: Bio */}
+                    <motion.div variants={itemVariants} style={{ height: '100%' }}>
+                        <TiltCard className="glass-card" style={{ height: '100%', padding: '2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                            <h3 className="text-accent" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                <ShieldCheck size={24} /> Who Am I?
+                            </h3>
+                            <p style={{ marginTop: '1.5rem', flex: 1 }}>
+                                I am a results-driven <strong>Full Stack Engineer</strong> dedicated to the craft of building intelligent,
+                                high-performance digital ecosystems. My approach focuses on systematic architecture and
+                                groundbreaking technology to deliver applications that are as powerful as they are intuitive.
+                            </p>
+                        </TiltCard>
+                    </motion.div>
 
-                    {/* Bio & Terminal Column */}
-                    <div className="auto-layout" style={{ height: '100%' }}>
-                        <motion.div variants={itemVariants} style={{ height: '100%' }}>
-                            <TiltCard className="glass-card" style={{ height: '100%', padding: '2.5rem' }}>
-                                <h3 className="text-accent" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                    <ShieldCheck size={24} /> Who Am I?
-                                </h3>
-                                <p style={{ marginTop: '1.5rem' }}>
-                                    I am a results-driven <strong>Full Stack Engineer</strong> dedicated to the craft of building intelligent,
-                                    high-performance digital ecosystems. My approach focuses on systematic architecture and
-                                    groundbreaking technology to deliver applications that are as powerful as they are intuitive.
-                                </p>
-                            </TiltCard>
-                        </motion.div>
-                        <motion.div variants={itemVariants} style={{ height: '100%' }}>
-                            <Terminal />
-                        </motion.div>
-                    </div>
+                    {/* Item 3: Expertise */}
+                    <motion.div variants={itemVariants} style={{ height: '100%' }}>
+                        <TiltCard className="glass-card" style={{ height: '100%', padding: '2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                            <div className="flex items-center gap-4" style={{ marginBottom: '1rem' }}>
+                                <Award className="text-accent" />
+                                <h3>Expertise</h3>
+                            </div>
+                            <ul style={{ listStyle: 'none', padding: 0, color: 'var(--text-secondary)', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '0.5rem' }}>
+                                <li>Advanced Software Engineering</li>
+                                <li>AI & Machine Learning Systems</li>
+                                <li>Cloud-Native Architectures</li>
+                            </ul>
+                        </TiltCard>
+                    </motion.div>
+
+                    {/* Item 4: Terminal */}
+                    <motion.div variants={itemVariants} style={{ height: '100%' }}>
+                        <Terminal />
+                    </motion.div>
                 </motion.div>
             </Scroll3DSection>
         </section>

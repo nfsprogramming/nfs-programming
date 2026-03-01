@@ -4,21 +4,16 @@ import { useReducedMotion } from 'framer-motion';
 const chars = '!<>-_\\/[]{}—=+*^?#_0123456789';
 
 export default function ScrambleText({ text, delay = 0 }) {
-    const [displayText, setDisplayText] = useState("");
     const shouldReduceMotion = useReducedMotion();
+    const [displayText, setDisplayText] = useState(shouldReduceMotion ? text : "");
 
     useEffect(() => {
-        if (shouldReduceMotion) {
-            setDisplayText(text);
-            return;
-        }
+        if (shouldReduceMotion) return;
 
         let iteration = 0;
         let interval = null;
-        let started = false;
 
         const timeout = setTimeout(() => {
-            started = true;
             interval = setInterval(() => {
                 setDisplayText(
                     text.split("")

@@ -322,6 +322,13 @@ p {
   gap: var(--space-md);
 }
 
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 450px), 1fr));
+  grid-auto-rows: 1fr;
+  gap: var(--space-lg);
+}
+
 /* Navbar */
 .navbar {
   position: fixed;
@@ -446,10 +453,15 @@ p {
 
   /* Ensure grids collapse properly */
   .grid-2,
-  .grid-3 {
+  .grid-3,
+  .about-grid {
     grid-template-columns: 1fr !important;
     gap: 1.5rem;
     /* Reduce gap on mobile */
+  }
+
+  .about-grid {
+    grid-auto-rows: auto;
   }
 
   /* Adjust Navbar Padding */
@@ -635,4 +647,132 @@ section {
     grid-template-columns: 1fr !important;
     gap: 1.5rem;
   }
+}
+
+/* Safety net — remove all blurs from animated elements */
+.project-card,
+.project-card *,
+.section-header {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  filter: none !important;
+}
+
+/* Sharp Project Card Design (Tailwind Translated) */
+.project-card {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #0D0D0D;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  border-color: rgba(230, 57, 70, 0.5);
+  box-shadow: 0 0 30px rgba(230, 57, 70, 0.15);
+}
+
+.card-image-wrap {
+  position: relative;
+  height: 12rem;
+  overflow: hidden;
+}
+
+.card-img-inner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* Only allow filter/transform on hover image zoom — nothing else */
+.project-card:hover .card-img-inner {
+  transform: scale(1.05);
+}
+
+.card-image-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, #0D0D0D, transparent);
+  pointer-events: none;
+}
+
+.card-body {
+  padding: 1.25rem;
+  background-color: #0D0D0D;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-title {
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s;
+}
+
+.project-card:hover .card-title {
+  color: #F87171;
+}
+
+.card-desc {
+  color: #9CA3AF;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.card-tag {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(230, 57, 70, 0.3);
+  color: #F87171;
+  background-color: rgba(230, 57, 70, 0.08);
+}
+
+.card-links {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card-link-git {
+  font-size: 0.75rem;
+  color: #6B7280;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: color 0.3s;
+}
+
+.card-link-git:hover {
+  color: #FFFFFF;
+}
+
+.card-link-live {
+  font-size: 0.75rem;
+  color: #F87171;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: color 0.3s;
+}
+
+.card-link-live:hover {
+  color: #FCA5A5;
 }

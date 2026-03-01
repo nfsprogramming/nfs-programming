@@ -5,19 +5,19 @@ import { motion, AnimatePresence } from 'framer-motion';
 import * as THREE from 'three';
 
 const skills = [
-    'React', 'Node.js', 'Python', 'AI/ML', 'JavaScript', 
-    'TypeScript', 'Next.js', 'Three.js', 'Framer Motion', 
-    'Tailwind', 'Docker', 'AWS', 'PostgreSQL', 'MongoDB', 
+    'React', 'Node.js', 'Python', 'AI/ML', 'JavaScript',
+    'TypeScript', 'Next.js', 'Three.js', 'Framer Motion',
+    'Tailwind', 'Docker', 'AWS', 'PostgreSQL', 'MongoDB',
     'Git', 'UI/UX', 'NLP', 'PyTorch', 'FastAPI'
 ];
 
 function Word({ children, onHover, ...props }) {
     const color = new THREE.Color();
-    const fontProps = { 
-        fontSize: 2.5, 
-        letterSpacing: -0.05, 
-        lineHeight: 1, 
-        'material-toneMapped': false 
+    const fontProps = {
+        fontSize: 2.5,
+        letterSpacing: -0.05,
+        lineHeight: 1,
+        'material-toneMapped': false
     };
     const ref = useRef();
     const [hovered, setHovered] = useState(false);
@@ -57,7 +57,7 @@ function Cloud({ radius = 20, textColor, onHover }) {
     }, [radius]);
 
     const groupRef = useRef();
-    useFrame((state) => {
+    useFrame(() => {
         groupRef.current.rotation.y += 0.002;
         groupRef.current.rotation.x += 0.001;
     });

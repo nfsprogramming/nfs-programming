@@ -72,11 +72,10 @@ export default function Hero() {
                     left: '5%',
                     width: 'min(500px, 80vw)',
                     height: 'min(500px, 80vw)',
-                    background: 'radial-gradient(circle, var(--accent-color) 0%, transparent 70%)',
+                    background: 'radial-gradient(circle, var(--accent-color) 0%, transparent 60%)',
                     borderRadius: '50%',
-                    filter: 'blur(100px)',
                     zIndex: 0,
-                    opacity: 0.15
+                    opacity: 0.1
                 }}
             />
 
@@ -100,11 +99,10 @@ export default function Hero() {
                     right: '10%',
                     width: 'min(450px, 80vw)',
                     height: 'min(450px, 80vw)',
-                    background: 'radial-gradient(circle, var(--accent-color) 0%, transparent 70%)',
+                    background: 'radial-gradient(circle, var(--accent-color) 0%, transparent 60%)',
                     borderRadius: '50%',
-                    filter: 'blur(100px)',
                     zIndex: 0,
-                    opacity: 0.12
+                    opacity: 0.08
                 }}
             />
 

@@ -22,8 +22,8 @@ const messages = [
  * 
  * @param {Function} onComplete - Callback when loading finishes
  */
-const Preloader = ({ 
-    onComplete, 
+const Preloader = ({
+    onComplete,
     accentColor = "#ff2e2e",
     backgroundColor = "#000000",
     textColor = "#ffffff"
@@ -69,10 +69,10 @@ const Preloader = ({
             aria-label="Loading portfolio"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ 
+            exit={{
                 opacity: 0,
                 scale: shouldReduceMotion ? 1 : 1.1,
-                filter: shouldReduceMotion ? 'none' : 'blur(20px)',
+                y: -40,
                 transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] }
             }}
             style={{
@@ -93,7 +93,7 @@ const Preloader = ({
                 <motion.div
                     animate={{
                         scale: [1, 1.2, 1],
-                        opacity: [0.1, 0.2, 0.1],
+                        opacity: [0.05, 0.1, 0.05],
                     }}
                     transition={{
                         duration: 4,
@@ -104,8 +104,7 @@ const Preloader = ({
                         position: 'absolute',
                         width: '60vw',
                         height: '60vw',
-                        background: `radial-gradient(circle, ${accentColor}33 0%, transparent 70%)`,
-                        filter: 'blur(60px)',
+                        background: `radial-gradient(circle, ${accentColor}33 0%, transparent 60%)`,
                         zIndex: -1
                     }}
                 />
@@ -155,10 +154,10 @@ const Preloader = ({
                     <motion.h1
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        style={{ 
-                            fontSize: '1rem', 
-                            letterSpacing: '0.4em', 
-                            textTransform: 'uppercase', 
+                        style={{
+                            fontSize: '1rem',
+                            letterSpacing: '0.4em',
+                            textTransform: 'uppercase',
                             margin: 0,
                             fontWeight: 400,
                             color: 'rgba(255,255,255,0.9)'
@@ -166,11 +165,11 @@ const Preloader = ({
                     >
                         NFS Portfolio
                     </motion.h1>
-                    
+
                     <div style={{ height: '24px', marginTop: '0.5rem' }}>
                         <p
-                            style={{ 
-                                fontSize: '0.75rem', 
+                            style={{
+                                fontSize: '0.75rem',
                                 color: 'rgba(255,255,255,0.4)',
                                 margin: 0,
                                 fontStyle: 'italic'
@@ -183,17 +182,17 @@ const Preloader = ({
             </div>
 
             {/* Bottom Progress Line */}
-            <motion.div 
-                style={{ 
-                    position: 'absolute', 
-                    bottom: 0, 
-                    left: 0, 
-                    height: '2px', 
+            <motion.div
+                style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    height: '2px',
                     background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)`,
                     width: '100%',
                     scaleX: progress / 100,
                     transformOrigin: 'center'
-                }} 
+                }}
             />
         </motion.div>
     );

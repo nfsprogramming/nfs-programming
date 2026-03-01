@@ -16,6 +16,7 @@ import Workflow from './components/Workflow';
 import PageTransition from './components/ui/PageTransition';
 import Preloader from './components/ui/Preloader';
 import QuickActions from './components/ui/QuickActions';
+import DevModeDashboard from './components/ui/DevModeDashboard';
 import './grain.css';
 
 function ScrollToTop() {
@@ -93,6 +94,7 @@ export default function App() {
           >
             <CustomCursor />
             <QuickActions />
+            <DevModeDashboard />
             {/* Global Scroll Progress Bar */}
             <motion.div
               className="scroll-progress-bar"
@@ -114,18 +116,18 @@ export default function App() {
               <div className="grain-overlay" />
               <Navbar />
               <AnimatedRoutes />
-              <footer className="footer" style={{ 
-                position: 'relative', 
-                zIndex: 10, 
-                background: 'rgba(5, 5, 5, 0.95)', 
+              <footer className="footer" style={{
+                position: 'relative',
+                zIndex: 10,
+                background: 'rgba(5, 5, 5, 0.95)',
                 backdropFilter: 'blur(20px)',
                 borderTop: '1px solid rgba(255, 255, 255, 0.05)',
                 padding: '6rem 2rem 2rem 2rem'
               }}>
                 <div className="container">
-                  <div style={{ 
-                    display: 'grid', 
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
                     gap: '4rem',
                     marginBottom: '4rem'
                   }}>
@@ -182,11 +184,11 @@ export default function App() {
                   </div>
 
                   {/* Bottom Bar */}
-                  <div style={{ 
-                    paddingTop: '2rem', 
-                    borderTop: '1px solid rgba(255, 255, 255, 0.05)', 
-                    display: 'flex', 
-                    justifyContent: 'space-between', 
+                  <div style={{
+                    paddingTop: '2rem',
+                    borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+                    display: 'flex',
+                    justifyContent: 'space-between',
                     alignItems: 'center',
                     flexWrap: 'wrap',
                     gap: '1rem'
